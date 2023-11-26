@@ -1,0 +1,37 @@
+package com.MiSaludDigital.ServicioSalud.entidades;
+
+
+import java.time.LocalTime;
+import java.util.ArrayList;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import lombok.Data;
+
+@Entity
+@Data
+public class Profesional{
+
+    @Id
+    private Long matriculaProfesional;
+    
+    private String nombreProfesional;
+    private String apellidoProfesional;
+    private int edadProfesional;
+    private String especialidadProfesional;
+    private Long puntuacionProfesional;
+    private LocalTime horariosDisponibles;
+    private double precioConsulta;
+    
+    @OneToMany
+    private ArrayList<Turno> turnos;
+    
+    @OneToMany
+    private ArrayList<HistoriaClinica> historiaClinicas;  
+
+    @ManyToOne
+    private Paciente paciente;
+   
+}
