@@ -1,5 +1,6 @@
 package com.MiSaludDigital.ServicioSalud.servicios;
 
+import java.time.LocalTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,14 @@ public class ProfesionalServicio {
 
     @Autowired
     private ProfesionalRepositorio profesionalRepositorio;
+
+  public void crearProfesional(String nombreProfesional, String apellidoProfesional, int ededProfesional, String especialidadProfesional, Long puntuacionProfesional,LocalTime horariosDisponibles, double precioConsulta){
+    
+        Profesional profesional = new Profesional();
+       
+
+    }
+
 
     //LISTAR PROFESIONALES
     public List<Profesional> listaProfesionales() {

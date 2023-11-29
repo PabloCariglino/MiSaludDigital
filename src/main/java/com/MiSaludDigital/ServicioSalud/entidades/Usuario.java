@@ -7,11 +7,12 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Usuario {
     
     @Id
@@ -21,10 +22,8 @@ public class Usuario {
     private String nombreUsuario;
     private String password;
     private String email;
-    private Boolean ActividadUsuario;
+    //private Boolean ActividadUsuario;
     
-    @OneToOne
-    private Imagen imagen;
 
     @Enumerated()
     private Rol rol;
