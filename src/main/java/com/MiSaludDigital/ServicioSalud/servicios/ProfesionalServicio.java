@@ -1,6 +1,6 @@
 package com.MiSaludDigital.ServicioSalud.servicios;
 
-import java.time.LocalTime;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,33 +15,41 @@ public class ProfesionalServicio {
     @Autowired
     private ProfesionalRepositorio profesionalRepositorio;
 
-  public void crearProfesional(String nombreProfesional, String apellidoProfesional, int ededProfesional, String especialidadProfesional, Long puntuacionProfesional,LocalTime horariosDisponibles, double precioConsulta){
-    
-        Profesional profesional = new Profesional();
-       
+    public Profesional crearProfesional(Long matriculaProfesional,String nombreProfesional, String apellidoProfesional, int edadProfesional,
+            String especialidadProfesional, Long puntuacionProfesional,
+            double precioConsulta) {
 
+        Profesional profesional = new Profesional();
+        profesional.setMatriculaProfesional(matriculaProfesional);
+        profesional.setNombreProfesional(nombreProfesional);
+        profesional.setApellidoProfesional(apellidoProfesional);
+        profesional.setEdadProfesional(edadProfesional);
+        profesional.setEspecialidadProfesional(especialidadProfesional);
+        profesional.setPuntuacionProfesional(puntuacionProfesional);
+        // profesional.setHorariosDisponibles(horariosDisponibles); // Agregar ARRIBA!
+        profesional.setPrecioConsulta(precioConsulta);
+        return profesionalRepositorio.save(profesional);
     }
 
-
-    //LISTAR PROFESIONALES
+    // LISTAR PROFESIONALES
     public List<Profesional> listaProfesionales() {
 
         return (List<Profesional>) profesionalRepositorio.findAll();
     }
 
-    //GUARDAR PROFESIONALES
+    // GUARDAR PROFESIONALES
     public void guardar(Profesional profesional) {
 
         profesionalRepositorio.save(profesional);
     }
 
-    //ELIMINAR PROFESIONALES
+    // ELIMINAR PROFESIONALES
     public void eliminar(Profesional profesional) {
 
         profesionalRepositorio.delete(profesional);
     }
 
-    //BUSCAR PROFESIONAL POR ID
+    // BUSCAR PROFESIONAL POR ID
     public Profesional buscarProfesional(Profesional profesional) {
 
         return profesionalRepositorio.findById(profesional.getMatriculaProfesional()).orElse(null);

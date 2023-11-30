@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.MiSaludDigital.ServicioSalud.entidades.Paciente;
 
 @Repository
-public interface PacienteRepositorio extends JpaRepository<Paciente,Long>{
+public interface PacienteRepositorio extends JpaRepository<Paciente,String>{
     
     //QUERY QUE BUSCA A PACIENTE POR ID DNI/ CREAR SU RESPECTIVO METODO EN SERVICIO
     //@Query("SELECT p FROM Paciente p WHERE p.dniPaciente = :dniPaciente")

@@ -5,6 +5,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -15,8 +17,10 @@ import lombok.Data;
 public class Profesional{
 
     @Id
-    private Long matriculaProfesional;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     
+    private Long matriculaProfesional;
     private String nombreProfesional;
     private String apellidoProfesional;
     private int edadProfesional;

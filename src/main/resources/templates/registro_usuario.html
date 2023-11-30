@@ -1,189 +1,37 @@
-<!doctype html>
-<html lang="en" xlmns:th="http://www.thymeleaf.org">
-    <!--<head th:replace ="/fragments/head :: head"> </head>-->
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    
-        <title>Salud W</title>
-    
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+        <title>Mi Salud Digital</title>
     </head>
-
-
-    <body class="bg-success p-2" style="--bs-bg-opacity: .5;">
-
-
-        
-            <!--<nav th:replace="../fragments/navbar :: nav" > </nav>  -->
-        <nav class="navbar navbar-dark bg-dark">
-
-            <div class="container-fluid">   
-                <div class="ratio-16x9">
-                    
-        
+    <body>
+        <header th:replace="~{fragments/header :: head}"></header>
+        <div class="container col-md-4 text-center">
+            <h2>Registro usuario</h2>
+            <form class="FormRegistro" action="/registroUsuario" method="POST">
+                <div class="form-group mb-2">
+                    <input type="text" class="form-group" name="nombre" placeholder="NOMBRE" th:value="${nombre}" />
                 </div>
-                <a class="navbar-brand" href="/inicio"> <img width="50" class="img-thumbnail" src="https://cdn.pixabay.com/photo/2017/06/17/04/17/doctor-2411135_1280.png" alt=""></a>
-        
-                <li class="nav-item dropdown">      <!-- Aca indicamos que si hay sesion activa que se muestre el boton-->
-                    <!--<a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-                        Paciente</a>-->
-        
-                        <a class="nav-link dropdown-toggle"  href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-                            Paciente</a>
-                       
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/paciente/datos">Mis datos</a></li>
-                        <li><a class="dropdown-item" href="#"> </a></li>
-        
-                    </ul>
-                </li>
-                
-                <li class="nav-item dropdown">      <!-- Aca indicamos que si hay sesion activa que se muestre el boton-->
-                    <!--<a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-                        Paciente</a>-->
-        
-                        <a class="nav-link dropdown-toggle"  href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-                            Profesional</a>
-                       
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/paciente/datos">Mis datos</a></li>
-                        <li><a class="dropdown-item" href="#">Mis turnos</a></li>
-                        <li><a class="dropdown-item" href="#">Mis pacientes</a></li>
-        
-                    </ul>
-                </li>
-             
-                
-                 <!--
-                        despues lo usamos
-                    
-                    <li class="nav-item dropdown">       Aca indicamos que si no hay sesion activa se muestre el boton
-                    <a class="nav-link active" th:if="${session.usuariosession == null}" href="/login" id="navbarDropdown" >
-                        Iniciar sesion
-                    </a>
-                    
-                </li>
-                 <li class="nav-item dropdown">
-                    <a class="nav-link active" th:if="${session.usuariosession == null}" href="/registrar" id="navbarDropdown">
-                        Registrar
-                    </a>
-                   
-                </li> 
-                    -->
-        
-                    <!--  th:if="${session.usuariosession != null}" -->
-                
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Perfil
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/logout">Cerrar sesion</a></li>
-        
-                    </ul>
-                </li>
-        
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <a class="nav-link"> Has sido RickRoleado</a>
-                        <div class="container">
-                            <div  class="content-center">
-        
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=5DhI6NsP6U9wZZlQ" 
-                                        title="Has sido RickRoleado" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                            </div>
-        
-                        </div>
-                    </div>
-        
-        
-        
+                <div class="form-group mb-2">
+                    <input type="email" class="form-group" name="email" placeholder="EMAIL" th:value="${email}" />
                 </div>
-        
-        </nav>
-       
-       
-               <div class= "ratio ratio-16x9">
-                   <img  src="https://s3.amazonaws.com/rtvc-assets-canalinstitucional.tv/s3fs-public/styles/interna_noticias_after_1222x547_/public/2022-11/pexels-pixabay-40568.jpg?itok=eArRFrFB" alt=""> 
-                   
-                   <div class="container"> 
-
-
-                    <div class="text-center" >
-                        <div th:if="${error != null}" class="div-error">
-                            <h5>Error</h5>
-                            <p th:text="${error}"></p>
-                        </div>
-    
-                        <div th:if="${exito != null}" class="div-exito">
-                            <h5>Éxito</h5>
-                            <p th:text="${exito}"></p>
-                        </div>
-    
-                        <div class="form-group">
-
-                        <h2>Registro usuario</h2>
-        
-                        <form class="FormRegistro" action="/registroUsuario" method="POST">
-        
-        
-                             
-                            <div class="container">
-                                <input type="text" class="form-group" name="nombre" placeholder="NOMBRE" th:value = "${nombre}">
-                                </div>
-                                <br>
-            
-                                <input type="email" class="form-group" name="email" placeholder="EMAIL" th:value = "${email}">
-                                <br>
-                                <br>
-                                <input type="password" class="form-group" name="password" placeholder="CONTRASEÑA" th:value = "${password}">
-                                <br>
-                                <br>
-                                <input type="password" class="form-group" name="password2" placeholder="REPETIR CONTRASEÑA" th:value = "${password2}">
-                 
-                            </div>
-                            <br>
-            
-                            <button class="btn btn-primary" type="submit">Registrarme</button>
-        
-                        </form>
-                    </div>
-        
-        
+                <div class="form-group mb-2">
+                    <input type="password" class="form-group" name="password" placeholder="CONTRASEÑA" th:value="${password}" />
                 </div>
-       
-                   </div>
-               </div>
-       
-              
-       
-       
-       
-       
-       
-               <!-- Optional JavaScript; choose one of the two! -->
-       
-               <!-- Option 1: Bootstrap Bundle with Popper -->
-               <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-       
-               <!-- Option 2: Separate Popper and Bootstrap JS -->
-               <!--
-               <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-               <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-               -->
-       
-           </body>
-       
-       
-      
-
-
-
+                <div class="form-group mb-2">
+                    <input type="password" class="form-group" name="password2" placeholder="REPETIR CONTRASEÑA" th:value="${password2}" />
+                </div>
+                <button class="btn btn-primary" type="submit">Registrarme</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <div class="image_1"><img src="images/img-1.png" /></div>
+        </div>
+        <!-- Mostrar nombre del usuario mediante la session -->
+        <h2 th:if="${session.usuariosession != null}" th:text="${session.usuariosession.nombreUsuario}"></h2>
+        <!-- header section start -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    </body>
 </html>
