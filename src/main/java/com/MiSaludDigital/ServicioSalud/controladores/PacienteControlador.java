@@ -40,4 +40,25 @@ public class PacienteControlador {
 
     }
     
+    @GetMapping("/datos")
+    public String datosPaciente(){
+
+        return"/paciente/datos_paciente.html";
+    }
+
+    // VISTA PARA SELECCIONAR EL TURNO DEL PACIENTE
+     @GetMapping("/selectTurno")
+     public String sacarTurno() {
+ 
+         return "select_turno.html";
+     }
+ 
+
+     // VISTA DEL PACIENTE
+     @GetMapping("/inicioPaciente")
+     public String vistaPaciente() {
+ 
+         return "vistaPaciente.html";
+     }
+ 
 }

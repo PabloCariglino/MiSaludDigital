@@ -68,28 +68,16 @@ public class InicioControlador {
         }
     }
 
-    // HACER UN CONTROLADOR PARA PACIENTE
-    // VISTA DEL PACIENTE
-    @GetMapping("/inicioPaciente")
-    public String vistaPaciente() {
-
-        return "vistaPaciente.html";
-    }
-
-    // HACER UN CONTROLADOR PARA PACIENTE
-    // VISTA DEL PACIENTE
+  
+   
+    
+    // VISTA DEL PROFESIONAL
     @GetMapping("/inicioProfesional")
     public String vistaProfesional() {
 
         return "vistaProfesional.html";
     }
 
-    // ESTO VA EN EL CONTROLADOR PACIENTE
-    // VISTA PARA SELECCIONAR EL TURNO
-    @GetMapping("/turno")
-    public String vistaTurno() {
-
-        return "vistaTurno.html";
-    }
-
+  
+   
 }

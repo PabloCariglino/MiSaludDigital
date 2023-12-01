@@ -12,7 +12,12 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
 
    public Usuario findByEmail(String email);
 
-   // @Query("SELECT u FROM Usuario u WHERE u.email = :email")
-   // public Usuario buscarPorEmail(@Param("email") String email);
+   //buscar por email de usuario
+   //@Query("SELECT u FROM Usuario u WHERE u.email = :email")
+   //public Usuario buscarPorEmail(@Param("email") String email);
+
+   //buscar por id de usuario
+   //@Query("SELECT u FROM Usuario u WHERE u.email = :email")
+   //public Usuario findById(@Param("idUsuario") String idUsuario);
 
 }

@@ -12,8 +12,9 @@ import com.MiSaludDigital.ServicioSalud.repositorios.PacienteRepositorio;
 public class PacienteServicio {
     @Autowired
     private PacienteRepositorio pacienteRepositorio;
-    
-    public Paciente crearPaciente(Long dniPaciente,String nombrePaciente,String ApellidoPaciente,Date fechaNacimientoPaciente,String obraSocial,Double telContacto,String intencionConsulta){
+
+    public Paciente crearPaciente(Long dniPaciente, String nombrePaciente, String ApellidoPaciente,
+            Date fechaNacimientoPaciente, String obraSocial, Double telContacto, String intencionConsulta) {
 
         Paciente paciente = new Paciente();
         paciente.setDniPaciente(dniPaciente);
@@ -23,7 +24,28 @@ public class PacienteServicio {
         paciente.setObraSocial(obraSocial);
         paciente.setTelContacto(telContacto);
         paciente.setIntencionConsulta(intencionConsulta);
-        
+
         return pacienteRepositorio.save(paciente);
     }
+
+ 
+    // GUARDAR PROFESIONALES
+    public void guardar(Paciente paciente) {
+
+        pacienteRepositorio.save(paciente);
+    }
+
+    // ELIMINAR PROFESIONALES
+    public void eliminar(Paciente paciente) {
+
+        pacienteRepositorio.delete(paciente);
+    }
+
+    // BUSCAR PROFESIONAL POR ID
+
+    /* public Paciente buscarPaciente(Paciente paciente) {
+
+        return pacienteRepositorio.findById(paciente.getMatriculaProfesional()).orElse(null);
+    }*/
+    
 }

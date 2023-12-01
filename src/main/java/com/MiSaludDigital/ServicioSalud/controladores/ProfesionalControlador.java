@@ -38,4 +38,19 @@ public class ProfesionalControlador {
         return "profesional/profesional_form.html";
 
     }
+
+    @GetMapping("/listadoDeTurnos")
+    public String listadoDeTurnos(){
+
+        return"/profesional/ListaTurnosProfesional.html";
+    }
+
+    @GetMapping("/listadoPacientes")
+    public String listadoPacientes() {
+
+        return"/profesional/lista_pacientes";
+    }
+    
+
+
 }
