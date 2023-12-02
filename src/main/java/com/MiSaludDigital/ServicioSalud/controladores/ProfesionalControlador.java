@@ -52,5 +52,12 @@ public class ProfesionalControlador {
     }
     
 
+     // VISTA DEL PROFESIONAL
+     @GetMapping("/inicioProfesional")
+     public String vistaProfesional() {
+ 
+         return "vistaProfesional.html";
+     }
+
 
 }

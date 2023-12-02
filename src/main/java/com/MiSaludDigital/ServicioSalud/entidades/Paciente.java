@@ -16,7 +16,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Paciente {
+public class Paciente{
     
     @Id
     @GeneratedValue(generator = "uuid")

@@ -50,7 +50,7 @@ public class PacienteControlador {
      @GetMapping("/selectTurno")
      public String sacarTurno() {
  
-         return "select_turno.html";
+         return "agendar_turno.html";
      }
  
 

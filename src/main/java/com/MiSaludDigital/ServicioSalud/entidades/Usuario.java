@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class Usuario {
+public class Usuario{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class Usuario {
     private String nombreUsuario;
     private String password;
     private String email;
-    //private Boolean ActividadUsuario;
+    //private Boolean estadoUsuario;
     
 
     @Enumerated()
