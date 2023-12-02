@@ -42,13 +42,13 @@ public class ProfesionalControlador {
     @GetMapping("/listadoDeTurnos")
     public String listadoDeTurnos(){
 
-        return"/profesional/ListaTurnosProfesional.html";
+        return"profesional/lista_turnosProfesional.html";
     }
 
     @GetMapping("/listadoPacientes")
     public String listadoPacientes() {
 
-        return"/profesional/lista_pacientes";
+        return"profesional/lista_pacientes";
     }
     
 
