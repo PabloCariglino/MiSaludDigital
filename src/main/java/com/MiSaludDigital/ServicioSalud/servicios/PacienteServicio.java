@@ -29,13 +29,13 @@ public class PacienteServicio {
     }
 
  
-    // GUARDAR PROFESIONALES
+    // GUARDAR PACIENTE
     public void guardar(Paciente paciente) {
 
         pacienteRepositorio.save(paciente);
     }
 
-    // ELIMINAR PROFESIONALES
+    // ELIMINAR PACIENTE
     public void eliminar(Paciente paciente) {
 
         pacienteRepositorio.delete(paciente);
