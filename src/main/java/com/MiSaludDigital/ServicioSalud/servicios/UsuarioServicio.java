@@ -2,6 +2,7 @@ package com.MiSaludDigital.ServicioSalud.servicios;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,7 +15,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.MiSaludDigital.ServicioSalud.entidades.Imagen;
 import com.MiSaludDigital.ServicioSalud.entidades.Usuario;
 import com.MiSaludDigital.ServicioSalud.enumeraciones.Rol;
 import com.MiSaludDigital.ServicioSalud.repositorios.UsuarioRepositorio;
@@ -28,14 +31,15 @@ public class UsuarioServicio implements UserDetailsService {
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
 
-    // @Autowired
-    // private ImagenServicio imagenServicio;
+    @Autowired
+    private ImagenServicio imagenServicio;
 
     // METODO PARA REGISTRO CREACION DE USUARIO
     @Transactional
-    public void registrarUsuario(String nombre, String email, String password, String password2) {
+    public void registrarUsuario(String nombre, String email, String password, String password2, MultipartFile archivo)
+            throws Exception {
 
-        // validar(nombre, email, password, password2);
+        validar(nombre, email, password, password2);
 
         Usuario usuario = new Usuario();
 
@@ -49,14 +53,95 @@ public class UsuarioServicio implements UserDetailsService {
             usuario.setRol(Rol.USER);
         }
 
-        // Imagen imagen = imagenServicio.guardar(archivo);
+        Imagen imagen = imagenServicio.guardar(archivo);
 
-        // usuario.setImagen(imagen);
+        usuario.setImagen(imagen);
 
         usuarioRepositorio.save(usuario);
     }
+
+    // ACTUALIZAR EL PERFIL DEL USUARIO
+    @Transactional
+    public void actualizarUsuario(MultipartFile archivo, Long idUsuario, String nombreUsuario, String email,
+            String password,
+            String password2) throws Exception {
+
+        validar(nombreUsuario, email, password, password2);
+
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
+        if (respuesta.isPresent()) {
+
+            Usuario usuario = respuesta.get();
+            usuario.setNombreUsuario(nombreUsuario);
+            usuario.setEmail(email);
+
+            usuario.setPassword(new BCryptPasswordEncoder().encode(password));
+
+            // usuario.setRol(Rol.USER);
+
+            String idImagen = null;
+
+            if (usuario.getImagen() != null) {
+                idImagen = usuario.getImagen().getId();
+            }
+
+            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+
+            usuario.setImagen(imagen);
+
+            usuarioRepositorio.save(usuario);
+        }
+
+    }
+
+    // DEVUELVE UN USUARIO POT ID
+    public Usuario getOne(Long id) {
+        return usuarioRepositorio.getOne(id);
+    }
+
+    // LISTAR Usuarios
+    public List<Usuario> ListarUsuarios() {
+
+        List<Usuario> usuarios = new ArrayList<>();
+        usuarios = usuarioRepositorio.findAll();
+        return usuarios;
+
+    }
+
+    // ELIMINAR Usuarios
+    /*
+     * public void eliminarUsuario(Long id) {
+     * Optional<Usuario> validacion = usuarioRepositorio.findById(id);
+     * if (validacion.isPresent()) {
+     * Usuario usuario = validacion.get();
+     * usuario.setAlta(false);
+     * usuarioRepositorio.save(usuario);
+     * 
+     * }
+     * }
+     */
+
     // El servicio debe implementar ↓
     // implements UserDetailsService
+
+    // VALIDACION PARA REGISTRO DE USUARIO
+    private void validar(String nombre, String email, String password, String password2) throws Exception {
+
+        if (nombre.isEmpty() || nombre == null) {
+            throw new Exception("el nombre no puede ser nulo o estar vacío");
+        }
+        if (email.isEmpty() || email == null) {
+            throw new Exception("el email no puede ser nulo o estar vacio");
+        }
+        if (password.isEmpty() || password == null || password.length() <= 5) {
+            throw new Exception("La contraseña no puede estar vacía, y debe tener más de 5 dígitos");
+        }
+
+        if (!password.equals(password2)) {
+            throw new Exception("Las contraseñas ingresadas deben ser iguales");
+        }
+
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -82,50 +167,4 @@ public class UsuarioServicio implements UserDetailsService {
             return null;
         }
     }
-
-    // ACTUALIZAR EL PERFIL DEL USUARIO
-    /*
-     * @Transactional
-     * public void actualizar(Long idUsuario, String nombre, String email, String
-     * password, String password2) {
-     * 
-     * //validar(nombre, email, password, password2);
-     * 
-     * java.util.Optional<Usuario> respuesta =
-     * usuarioRepositorio.findById(idUsuario);
-     * if (respuesta.isPresent()) {
-     * 
-     * Usuario usuario = respuesta.get();
-     * usuario.setNombreUsuario(nombre);
-     * usuario.setEmail(email);
-     * 
-     * usuario.setPassword(new BCryptPasswordEncoder().encode(password));
-     * 
-     * usuario.setRol(Rol.USER);
-     * 
-     * usuarioRepositorio.save(usuario);
-     * }
-     */
-
-     //LISTAR Usuarios
-    public List<Usuario> ListarUsuarios() {
-
-        List<Usuario> usuarios = new ArrayList<>();
-        usuarios = usuarioRepositorio.findAll();
-        return usuarios;
-
-    }
-
-    // ELIMINAR Usuarios
-    /*
-     * public void eliminarUsuario(Long id) {
-     * Optional<Usuario> validacion = usuarioRepositorio.findById(id);
-     * if (validacion.isPresent()) {
-     * Usuario usuario = validacion.get();
-     * usuario.setAlta(false);
-     * usuarioRepositorio.save(usuario);
-     * 
-     * }
-     * }
-     */
 }

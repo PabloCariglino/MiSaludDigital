@@ -43,6 +43,7 @@
                     <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_USER')or hasRole('ROLE_ADMIN')">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Perfil <span th:if="${session.usuariosession != null}" th:text="${session.usuariosession.nombreUsuario}"></span></a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/actualizarPerfil">Editar usuario</a></li>
                             <li><a class="dropdown-item" href="/logout">Cerrar sesion</a></li>
                         </ul>
                     </li>
