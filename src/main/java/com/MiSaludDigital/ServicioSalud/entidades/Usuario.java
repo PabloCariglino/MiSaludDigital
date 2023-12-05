@@ -7,6 +7,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Usuario {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsuario;
@@ -22,10 +23,11 @@ public class Usuario {
     private String nombreUsuario;
     private String password;
     private String email;
-    //private Boolean ActividadUsuario;
-    
+    // private Boolean estadoUsuario;
 
     @Enumerated()
     private Rol rol;
 
+    @OneToOne
+    private Imagen imagen;
 }
