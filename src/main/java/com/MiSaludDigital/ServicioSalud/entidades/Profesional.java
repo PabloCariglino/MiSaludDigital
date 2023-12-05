@@ -29,6 +29,7 @@ public class Profesional{
     private Long puntuacionProfesional;
     private LocalTime horariosDisponibles;
     private double precioConsulta;
+    private String caracteristicaDeOferta; //(telemedicina, presencial, ubicación, obras sociales, datos de contacto).
    // private Boolean estadoProfesional;// baja o alta del profesional en la vista profesional
     
     @OneToMany

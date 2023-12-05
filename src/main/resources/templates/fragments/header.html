@@ -35,9 +35,20 @@
                             Paciente</a>-->
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true"> Portal Profesional</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/profesional/registrar">Registrar</a></li>
+                            <li><a class="dropdown-item" href="#">Mis Datos</a></li>
                             <li><a class="dropdown-item" href="/profesional/listadoDeTurnos">Mis turnos</a></li>
-                            <li><a class="dropdown-item" href="/profesional/listadoDeTurnos">Mis pacientes</a></li>
+                            <li><a class="dropdown-item" href="/profesional/listadoPacientes">Mis pacientes</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')"> 
+                        <!-- Aca indicamos que si hay sesion activa que se muestre el boton-->
+                        <!--<a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                            Paciente</a>-->
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true"> Portal Administrador</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/profesional/registrar">Registrar Profesional</a></li>
+                            <li><a class="dropdown-item" href="#">Listado Profesinales</a></li>
+                            <li><a class="dropdown-item" href="#">Listado Pacientes</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_USER')or hasRole('ROLE_ADMIN')">
