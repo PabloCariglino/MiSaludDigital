@@ -36,14 +36,14 @@ public class UsuarioServicio implements UserDetailsService {
 
     // METODO PARA REGISTRO CREACION DE USUARIO
     @Transactional
-    public void registrarUsuario(String nombre, String email, String password, String password2, MultipartFile archivo)
+    public void registrarUsuario(String nombreUsuario, String email, String password, String password2, MultipartFile archivo)
             throws Exception {
 
-        validar(nombre, email, password, password2);
+        validar(nombreUsuario, email, password, password2);
 
         Usuario usuario = new Usuario();
 
-        usuario.setNombreUsuario(nombre);
+        usuario.setNombreUsuario(nombreUsuario);
         usuario.setEmail(email);
 
         usuario.setPassword(new BCryptPasswordEncoder().encode(password));

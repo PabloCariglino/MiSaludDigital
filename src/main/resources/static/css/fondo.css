@@ -1,0 +1,53 @@
+body{
+   
+    background-image: url('/images/vector azul.jpg') ;
+    margin:0;
+    
+}
+.contendor-imagen{
+    position:center;
+}
+.contenedor-formulario{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    
+    position: center;
+    width: 100%;
+}
+
+.mi-formulario{
+   border: 2px solid #007BFF;
+   padding: 20px;
+   border-radius: 10px;
+   background-color: #f0f0f088; 
+   position: center;
+   
+}
+
+.mi-recuadro{
+    border: 2px solid #007BFF; 
+    padding: 30px; 
+    margin: 20px auto; 
+    border-radius: 10px;
+    background-color: #f0f0f0b0; 
+    float: left;
+    width: 25%;
+    margin-right: 50px;
+}
+
+.container{
+    margin: 40px;
+}
+
+#carouselExampleControls{
+    margin-top: 20px;
+    float: right;
+    width: 60%;
+}
+.carousel-inner img{
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
