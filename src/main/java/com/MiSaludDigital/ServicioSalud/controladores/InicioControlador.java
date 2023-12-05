@@ -71,12 +71,7 @@ public class InicioControlador {
   
    
     
-    // VISTA DEL PROFESIONAL
-    @GetMapping("/inicioProfesional")
-    public String vistaProfesional() {
-
-        return "vistaProfesional.html";
-    }
+   
 
   
    
