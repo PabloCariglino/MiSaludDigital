@@ -1,0 +1,19 @@
+
+.header_section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .logo {
+    flex-grow: 1; /* Permite que el logo ocupe el espacio restante */
+  }
+  
+  .navbar {
+    flex-grow: 1; /* Permite que la barra de navegación ocupe el espacio restante */
+  }
+
+  
+  
+ 

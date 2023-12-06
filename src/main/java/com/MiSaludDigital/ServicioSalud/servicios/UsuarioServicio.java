@@ -36,7 +36,8 @@ public class UsuarioServicio implements UserDetailsService {
 
     // METODO PARA REGISTRO CREACION DE USUARIO
     @Transactional
-    public void registrarUsuario(String nombreUsuario, String email, String password, String password2, MultipartFile archivo)
+    public void registrarUsuario(String nombreUsuario, String email, String password, String password2,
+            MultipartFile archivo)
             throws Exception {
 
         validar(nombreUsuario, email, password, password2);
@@ -121,9 +122,6 @@ public class UsuarioServicio implements UserDetailsService {
      * }
      */
 
-    // El servicio debe implementar ↓
-    // implements UserDetailsService
-
     // VALIDACION PARA REGISTRO DE USUARIO
     private void validar(String nombre, String email, String password, String password2) throws Exception {
 
@@ -143,6 +141,8 @@ public class UsuarioServicio implements UserDetailsService {
 
     }
 
+    // El servicio debe implementar ↓
+    // implements UserDetailsService
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepositorio.findByEmail(email); // ←MODIFICAR
@@ -170,6 +170,6 @@ public class UsuarioServicio implements UserDetailsService {
 
     public Usuario getUsuarioConImagen(Long id) {
         return usuarioRepositorio.findById(id)
-        .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
     }
 }

@@ -1,13 +1,14 @@
 <div th:fragment="head">
-    <div class="header_section" >
+    <div class="header_section" style="font-weight: bold;">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="logo">
-                <a href="/index"><img src="/images/logo2.png" style="max-width: 70px; height: auto;"/></a>
+                <a href="/index"><img src="/images/logo2.png" style="max-width: 43px; height: auto;" /></a>
             </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" >
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href="/index">Home</a>
@@ -23,7 +24,8 @@
                         <!-- Aca indicamos que si hay sesion activa que se muestre el boton-->
                         <!--<a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
                             Paciente</a>-->
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true"> Portal Paciente</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="true"> Portal Paciente</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/paciente/registrar">Registrarse</a></li>
                             <li><a class="dropdown-item" href="/paciente/datos">Mis datos</a></li>
@@ -33,26 +35,31 @@
                         <!-- Aca indicamos que si hay sesion activa que se muestre el boton-->
                         <!--<a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
                             Paciente</a>-->
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true"> Portal Profesional</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="true"> Portal Profesional</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">Mis Datos</a></li>
                             <li><a class="dropdown-item" href="/profesional/listadoDeTurnos">Mis turnos</a></li>
                             <li><a class="dropdown-item" href="/profesional/listadoPacientes">Mis pacientes</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')"> 
+                    <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
                         <!-- Aca indicamos que si hay sesion activa que se muestre el boton-->
                         <!--<a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
                             Paciente</a>-->
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true"> Portal Administrador</a>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="true"> Portal Administrador</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/profesional/registrar">Registrar Profesional</a></li>
-                            <li><a class="dropdown-item" href="#">Listado Profesinales</a></li>
+                            <li><a class="dropdown-item" href="#">Listado Profesionales</a></li>
                             <li><a class="dropdown-item" href="#">Listado Pacientes</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_USER')or hasRole('ROLE_ADMIN')">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Perfil <span th:if="${session.usuariosession != null}" th:text="${session.usuariosession.nombreUsuario}"></span></a>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false"> Perfil <span
+                                th:if="${session.usuariosession != null}"
+                                th:text="${session.usuariosession.nombreUsuario}"></span></a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/actualizarPerfil">Editar usuario</a></li>
                             <li><a class="dropdown-item" href="/logout">Cerrar sesion</a></li>
