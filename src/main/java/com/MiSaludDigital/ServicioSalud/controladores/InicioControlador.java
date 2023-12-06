@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.MiSaludDigital.ServicioSalud.entidades.Usuario;
@@ -39,7 +40,7 @@ public class InicioControlador {
 
     @PostMapping("/registroUsuario")
     public String registro(@RequestParam String nombreUsuario, @RequestParam String email, @RequestParam String password,
-            String password2, ModelMap modelo, MultipartFile archivo) {
+            String password2, ModelMap modelo, @RequestPart MultipartFile archivo) {
 
         try {
 
@@ -83,29 +84,36 @@ public class InicioControlador {
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @PostMapping("/actualizarPerfil/{idUsuario}")
     public String actualizarUsuario(
-            MultipartFile archivo,
-            @PathVariable Long idUsuario,
-            @RequestParam String nombreUsuario,
-            @RequestParam String email,
-            @RequestParam String password,
-            @RequestParam String password2,
-            ModelMap modelo) {
+        @RequestPart MultipartFile archivo,
+        @PathVariable Long idUsuario,
+        @RequestParam String nombreUsuario,
+        @RequestParam String email,
+        @RequestParam String password,
+        @RequestParam String password2,
+        ModelMap modelo) {
 
-        try {
-            usuarioServicio.actualizarUsuario(archivo, idUsuario, nombreUsuario, email, password, password2);
+    try {
+        // Obtener el usuario antes de actualizar
+        Usuario usuario = usuarioServicio.getOne(idUsuario);
 
-            modelo.put("exito", "Usuario actualizado correctamente!");
-
-            return "index.html";
-        } catch (Exception ex) {
-
-            modelo.put("error", ex.getMessage());
-            modelo.put("nombre", nombreUsuario);
-            modelo.put("email", email);
-
-            return "actualizar_usuario.html";
+        // Verificar si el usuario existe
+        if (usuario == null) {
+            throw new Exception("Usuario no encontrado");
         }
 
+        // Actualizar el usuario
+        usuarioServicio.actualizarUsuario(archivo, idUsuario, nombreUsuario, email, password, password2);
+
+        modelo.put("exito", "Usuario actualizado correctamente!");
+
+        return "index.html";
+    } catch (Exception ex) {
+        modelo.put("error", ex.getMessage());
+        modelo.put("nombre", nombreUsuario);
+        modelo.put("email", email);
+
+        return "actualizar_usuario.html";
     }
+}
 
 }

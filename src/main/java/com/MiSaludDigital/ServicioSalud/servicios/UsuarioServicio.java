@@ -79,7 +79,7 @@ public class UsuarioServicio implements UserDetailsService {
 
             // usuario.setRol(Rol.USER);
 
-            String idImagen = null;
+            Long idImagen = null;
 
             if (usuario.getImagen() != null) {
                 idImagen = usuario.getImagen().getId();
@@ -166,5 +166,10 @@ public class UsuarioServicio implements UserDetailsService {
         } else {
             return null;
         }
+    }
+
+    public Usuario getUsuarioConImagen(Long id) {
+        return usuarioRepositorio.findById(id)
+        .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
     }
 }

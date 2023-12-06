@@ -9,7 +9,7 @@
     
     <div class="container-fluid m-5 contenedor">
 
-        <form class="formulario" th:action="@{/actualizarPerfil/__${usuario.idUsuario}__}" method="POST" enctype="multipart/form-data">
+        <form class="formulario" th:action="@{/actualizarPerfil/__${usuario != null ? usuario.idUsuario : ''}__}" method="POST" enctype="multipart/form-data">
 
             <input hidden th:value="${usuario.idUsuario}" name="idUsuario">
 
@@ -24,8 +24,9 @@
                 <input type="email" class="form-control" name="email"  th:value="${usuario.email}">
             </div>
             <div>
-               <!--<img th:src="${usuario.imagen.id}">--> 
-                <img th:src="@{/imagen/usuario/__${usuario.imagen.id}__}">
+                
+               <img th:if="${usuario != null and usuario.imagen != null}" th:src="@{/imagen/perfil/__${usuario.imagen.id}__}" alt="Imagen de perfil usuario" style="width: 200px; height: 200px;">
+
             </div>
             <div class="form-group my-3">
                 <input type="file" class="form-control" name="archivo" >

@@ -1,5 +1,6 @@
 package com.MiSaludDigital.ServicioSalud.controladores;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,19 +15,34 @@ import com.MiSaludDigital.ServicioSalud.servicios.UsuarioServicio;
 
 @Controller
 @RequestMapping("/imagen")
-public class imagenControlador {
+public class ImagenControlador {
 
-    private UsuarioServicio usuarioServicio;
+    private final UsuarioServicio usuarioServicio;
+
+    @Autowired
+    public ImagenControlador(UsuarioServicio usuarioServicio) {
+        this.usuarioServicio = usuarioServicio;
+    }
 
     @GetMapping("/perfil/{id}")
     public ResponseEntity<byte[]> imagenUsuario(@PathVariable Long id) {
-        Usuario usuario= usuarioServicio.getOne(id);
-        byte[] imagenUsuario= usuario.getImagen().getContenido();
+        try {
+            Usuario usuario = usuarioServicio.getUsuarioConImagen(id);
 
-        HttpHeaders headers = new HttpHeaders();
+            if (usuario != null && usuario.getImagen() != null) {
+                byte[] imagenBytes = usuario.getImagen().getContenido();
 
-        headers.setContentType(MediaType.IMAGE_JPEG);
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.IMAGE_JPEG);
+                headers.setContentLength(imagenBytes.length);
 
-        return new ResponseEntity<>(imagenUsuario, headers, HttpStatus.OK);
+                return new ResponseEntity<>(imagenBytes, headers, HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // Loguea el error
+        }
+
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
+
