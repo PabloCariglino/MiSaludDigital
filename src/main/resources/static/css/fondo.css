@@ -7,14 +7,27 @@ body{
 .contendor-imagen{
     position:center;
 }
-.contenedor-formulario{
+.contenedor-formulario-rusuario{
     display: flex;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-    
-    position: center;
-    width: 100%;
+    justify-content: right;
+    height: 90vh;
+    width: 61%;
+}
+.contenedor-formulario-portal{
+    display:flex;
+    align-items: center;
+    justify-content:right;
+    height: 90vh;
+    width: 58%; 
+   
+}
+.contenedor-formulario-login{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    height: 90vh;
+    width: 58%;
 }
 
 .mi-formulario{
