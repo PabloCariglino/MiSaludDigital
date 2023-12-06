@@ -22,6 +22,10 @@
 
         </div>
         <div>
+            <!--<img th:src="${usuario.imagen.id}">--> 
+             <img th:src="@{/imagen/usuario/__${usuario.imagen.id}__}">
+         </div>
+        <div>
             <!-- ACA VA EL FRAGMENTO DE LA VISTA DEL ADMINISTRADOR, CONDICIONAR POR EL ROL-->
 
         </div>

@@ -38,12 +38,12 @@ public class InicioControlador {
     }
 
     @PostMapping("/registroUsuario")
-    public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password,
+    public String registro(@RequestParam String nombreUsuario, @RequestParam String email, @RequestParam String password,
             String password2, ModelMap modelo, MultipartFile archivo) {
 
         try {
 
-            usuarioServicio.registrarUsuario(nombre, email, password, password2, archivo);
+            usuarioServicio.registrarUsuario(nombreUsuario, email, password, password2, archivo);
 
             modelo.put("exito", "Usuario registrado correctamente!");
 
@@ -51,7 +51,7 @@ public class InicioControlador {
         } catch (Exception ex) {
 
             modelo.put("error", ex.getMessage());
-            modelo.put("nombre", nombre);
+            modelo.put("nombre", nombreUsuario);
             modelo.put("email", email);
 
             return "registro_usuario.html";
