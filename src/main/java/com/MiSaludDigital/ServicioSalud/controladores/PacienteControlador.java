@@ -2,6 +2,7 @@ package com.MiSaludDigital.ServicioSalud.controladores;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,13 +12,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.MiSaludDigital.ServicioSalud.entidades.Profesional;
 import com.MiSaludDigital.ServicioSalud.servicios.PacienteServicio;
+import com.MiSaludDigital.ServicioSalud.servicios.ProfesionalServicio;
 
 @Controller
 @RequestMapping("/paciente")
 public class PacienteControlador {
     @Autowired
     private PacienteServicio pacienteServicio;
+
+    @Autowired
+    private ProfesionalServicio profesionalServicio;
 
     // CREATE
     @GetMapping("/registrar")
@@ -50,15 +56,17 @@ public class PacienteControlador {
      @GetMapping("/selectTurno")
      public String sacarTurno() {
  
-         return "agendar_turno.html";
+         return "/paciente/agendar_turno.html";
      }
  
 
      // VISTA DEL PACIENTE
      @GetMapping("/inicioPaciente")
-     public String vistaPaciente() {
+     public String vistaPaciente(ModelMap modelo) {
+        List<Profesional> profesionales = profesionalServicio.listaProfesionales();
+        modelo.addAttribute("profesionales", profesionales);
  
-         return "vistaPaciente.html";
+         return "/paciente/vistaPaciente.html";
      }
  
 }

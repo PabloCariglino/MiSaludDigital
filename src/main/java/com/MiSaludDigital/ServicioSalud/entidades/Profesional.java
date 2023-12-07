@@ -2,14 +2,12 @@ package com.MiSaludDigital.ServicioSalud.entidades;
 
 
 import java.time.LocalTime;
-import java.util.ArrayList;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 @Entity
@@ -32,11 +30,11 @@ public class Profesional{
     private String caracteristicaDeOferta; //(telemedicina, presencial, ubicación, obras sociales, datos de contacto).
    // private Boolean estadoProfesional;// baja o alta del profesional en la vista profesional
     
-    @OneToMany
-    private ArrayList<Turno> turnos;
+    //@OneToMany
+    //private ArrayList<Turno> turnos;
     
-    @OneToMany
-    private ArrayList<HistoriaClinica> historiaClinicas;  
+   // @OneToMany
+    //private ArrayList<HistoriaClinica> historiaClinicas;  
 
     @ManyToOne
     private Paciente paciente;

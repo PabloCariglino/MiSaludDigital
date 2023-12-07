@@ -172,8 +172,8 @@ public class UsuarioServicio implements UserDetailsService {
         return usuarioRepositorio.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
     }
-/* 
- * @Transactional
+
+    @Transactional
     public void registrarUsuarioProfesional(String nombreUsuario, String email, String password, String password2,
             MultipartFile archivo)
             throws Exception {
@@ -188,11 +188,11 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setPassword(new BCryptPasswordEncoder().encode(password));
         if (email.equals("admin@admin.com")) {
             usuario.setRol(Rol.ADMIN);
-        } else if{
-            
-            usuario.setRol(Rol.PROFESIONAL)
-        } else{
-             usuario.setRol(Rol.USER);
+        } else if (email.endsWith("@profesional.com")) {
+
+            usuario.setRol(Rol.PROFESIONAL);
+        } else {
+            usuario.setRol(Rol.USER);
         }
 
         Imagen imagen = imagenServicio.guardar(archivo);
@@ -201,6 +201,5 @@ public class UsuarioServicio implements UserDetailsService {
 
         usuarioRepositorio.save(usuario);
     }
-*/
-    
+
 }
