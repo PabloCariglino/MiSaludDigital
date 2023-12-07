@@ -25,12 +25,12 @@ public class AdminControlador {
     }
 
      // CREATE
-    @GetMapping("/registrar")
+    @GetMapping("/registrarDatosProfesional")
     public String registrarProfesional() {
         return "admin/profesional_form.html";
     }
 
-    @PostMapping("/registro")
+    @PostMapping("/registroDatosProfesional")
     public String registroProfesional(@RequestParam Long matriculaProfesional,@RequestParam String nombreProfesional,@RequestParam  String apellidoProfesional,@RequestParam  int edadProfesional,@RequestParam 
     String especialidadProfesional,@RequestParam  Long puntuacionProfesional,@RequestParam 
     double precioConsulta, ModelMap modelo) throws Exception {
