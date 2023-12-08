@@ -8,7 +8,7 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href="/index">Home</a>
@@ -32,7 +32,7 @@
                             <li><a class="dropdown-item" href="/paciente/inicioPaciente">Lista profesionales</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_PROFESIONAL') or hasRole('ROLE_ADMIN')">
                         <!-- Aca indicamos que si hay sesion activa que se muestre el boton-->
                         <!--<a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
                             Paciente</a>-->
@@ -51,13 +51,16 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="true"> Portal Administrador</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/admin/registrarUsuarioProfesional">Registrar Usuario Profesional</a></li>
-                            <li><a class="dropdown-item" href="/admin/registrarDatosProfesional">Registrar Datos Profesional</a></li>
+                            <li><a class="dropdown-item" href="/admin/registrarUsuarioProfesional">Registrar Usuario
+                                    Profesional</a></li>
+                            <li><a class="dropdown-item" href="/admin/registrarDatosProfesional">Registrar Datos
+                                    Profesional</a></li>
                             <li><a class="dropdown-item" href="#">Listado Profesionales</a></li>
                             <li><a class="dropdown-item" href="#">Listado Pacientes</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_USER')or hasRole('ROLE_ADMIN')">
+                    <li class="nav-item dropdown"
+                        sec:authorize="hasRole('ROLE_USER')or hasRole('ROLE_ADMIN')or hasRole('ROLE_PROFESIONAL')">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false"> Perfil <span
                                 th:if="${session.usuariosession != null}"

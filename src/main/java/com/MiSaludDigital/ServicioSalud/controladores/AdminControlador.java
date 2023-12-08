@@ -66,7 +66,7 @@ public class AdminControlador {
 
         try {
 
-            usuarioServicio.registrarUsuarioProfesional(nombreUsuario, email, password, password2, archivo);
+            usuarioServicio.registrarUsuario(nombreUsuario, email, password, password2, archivo);
 
             modelo.put("exito", "Usuario registrado correctamente!");
 

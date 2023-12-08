@@ -46,10 +46,19 @@ public class UsuarioServicio implements UserDetailsService {
 
         usuario.setNombreUsuario(nombreUsuario);
         usuario.setEmail(email);
-
         usuario.setPassword(new BCryptPasswordEncoder().encode(password));
+
         if (email.equals("admin@admin.com")) {
             usuario.setRol(Rol.ADMIN);
+
+        } else if (email.endsWith("@profesional.com")) {
+            // Verificar si el usuario actual tiene el rol de ADMIN
+            if (usuario.getRol() == Rol.ADMIN) {
+                usuario.setRol(Rol.PROFESIONAL);
+            } else {
+                throw new IllegalStateException("Solo el rol ADMIN puede registrar profesionales");
+            }
+
         } else {
             usuario.setRol(Rol.USER);
         }
@@ -171,35 +180,6 @@ public class UsuarioServicio implements UserDetailsService {
     public Usuario getUsuarioConImagen(Long id) {
         return usuarioRepositorio.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
-    }
-
-    @Transactional
-    public void registrarUsuarioProfesional(String nombreUsuario, String email, String password, String password2,
-            MultipartFile archivo)
-            throws Exception {
-
-        validar(nombreUsuario, email, password, password2);
-
-        Usuario usuario = new Usuario();
-
-        usuario.setNombreUsuario(nombreUsuario);
-        usuario.setEmail(email);
-
-        usuario.setPassword(new BCryptPasswordEncoder().encode(password));
-        if (email.equals("admin@admin.com")) {
-            usuario.setRol(Rol.ADMIN);
-        } else if (email.endsWith("@profesional.com")) {
-
-            usuario.setRol(Rol.PROFESIONAL);
-        } else {
-            usuario.setRol(Rol.USER);
-        }
-
-        Imagen imagen = imagenServicio.guardar(archivo);
-
-        usuario.setImagen(imagen);
-
-        usuarioRepositorio.save(usuario);
     }
 
 }
