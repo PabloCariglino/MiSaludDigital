@@ -48,7 +48,7 @@ public class AdminControlador {
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
         }
-        return "admin/profesional_form.html";
+        return "admin/altaDatos_profesional.html";
 
     }
 
@@ -92,6 +92,20 @@ public class AdminControlador {
             modelo.put("exito", "Bienvenido");
             return "login.html";
         }
+    }
+
+    // MUESTRA LISTA DE PROFESIONALES DEL ADMIN
+    @GetMapping("/listadoProfesionalesAdmin")
+    public String listadoProfesionalesAdmin() {
+
+        return "admin/listaProfesionales_admin";
+    }
+
+    // MUESTRA LISTA DE PACIENTES DEL ADMIN
+    @GetMapping("/listadoPacientesAdmin")
+    public String listadoPacientesAdmin() {
+
+        return "admin/listaPacientes_admin";
     }
 
 }

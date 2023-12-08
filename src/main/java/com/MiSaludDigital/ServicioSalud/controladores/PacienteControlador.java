@@ -28,7 +28,7 @@ public class PacienteControlador {
     // CREATE
     @GetMapping("/registrar")
     public String registrarPaciente() {
-        return "paciente/paciente_form.html";
+        return "paciente/altaDatos_paciente.html";
     }
 
     @PostMapping("/registro")
@@ -38,11 +38,11 @@ public class PacienteControlador {
             Date fechaDate = dateFormat.parse(fechaNacimientoPaciente);
             pacienteServicio.crearPaciente(dniPaciente, nombrePaciente,ApellidoPaciente, fechaDate, obraSocial, telContacto, intencionConsulta);
             modelo.put("exito", "Paciente registrado con éxito");
-            return "paciente/paciente_form.html";
+            return "/index.html";
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
         }
-        return "paciente/paciente_form.html";
+        return "paciente/altaDatos_paciente.html";
 
     }
     
