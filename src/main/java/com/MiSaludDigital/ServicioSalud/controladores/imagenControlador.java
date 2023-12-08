@@ -14,7 +14,7 @@ import com.MiSaludDigital.ServicioSalud.servicios.UsuarioServicio;
 
 @Controller
 @RequestMapping("/imagen")
-public class imagenControlador {
+public class ImagenControlador {
 
     private UsuarioServicio usuarioServicio;
 

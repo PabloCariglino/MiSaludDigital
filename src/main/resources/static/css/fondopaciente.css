@@ -1,30 +1,9 @@
 body{
    
-    background-image: url('/images/vector azul.jpg') ;
+    background-image: url('/images/fondo paciente.jpg') ;
+    margin:0;
     
-    
 }
-.imagen-fondoadmin,
-.imagen-fondouser {
-    position: fixed;
-   
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.imagen-fondoadmin{
-    background-image: url('/images/fondo admin.jpg');
-}
-
-.imagen-fondouser{
-    background-image: url('/images/fondo paciente.jpg');
-}
-
-
-
 .contendor-imagen{
     position:center;
 }
@@ -59,11 +38,7 @@ body{
    position: center;
    
 }
-.banner_taital {
-    
-    position: relative;
-    z-index: 2;
-}
+
 .mi-recuadro{
     border: 2px solid #007BFF; 
     padding: 30px; 
@@ -73,8 +48,6 @@ body{
     float: left;
     width: 25%;
     margin-right: 50px;
-    position: relative;
-    z-index: 1;
 }
 
 .container{
