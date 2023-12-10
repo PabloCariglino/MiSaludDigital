@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -48,17 +50,20 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setEmail(email);
         usuario.setPassword(new BCryptPasswordEncoder().encode(password));
 
+        // Obtener información de autenticación actual
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
         if (email.equals("admin@admin.com")) {
             usuario.setRol(Rol.ADMIN);
-
         } else if (email.endsWith("@profesional.com")) {
             // Verificar si el usuario actual tiene el rol de ADMIN
-            if (usuario.getRol() == Rol.ADMIN) {
+            if (authentication != null && authentication.getAuthorities().stream()
+                    .anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"))) {
+                // El usuario actual tiene el rol ADMIN
                 usuario.setRol(Rol.PROFESIONAL);
             } else {
                 throw new IllegalStateException("Solo el rol ADMIN puede registrar profesionales");
             }
-
         } else {
             usuario.setRol(Rol.USER);
         }

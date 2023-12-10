@@ -44,7 +44,7 @@ public class AdminControlador {
             profesionalServicio.crearProfesional(matriculaProfesional, nombreProfesional, apellidoProfesional,
                     edadProfesional, especialidadProfesional, puntuacionProfesional, precioConsulta);
             modelo.put("exito", "Profesional registrado con éxito");
-            return "admin/profesional_form.html";
+            return "/index";
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
         }
