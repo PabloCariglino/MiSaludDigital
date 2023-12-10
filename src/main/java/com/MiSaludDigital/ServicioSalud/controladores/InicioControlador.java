@@ -39,7 +39,8 @@ public class InicioControlador {
     }
 
     @PostMapping("/registroUsuario")
-    public String registro(@RequestParam String nombreUsuario, @RequestParam String email, @RequestParam String password,
+    public String registro(@RequestParam String nombreUsuario, @RequestParam String email,
+            @RequestParam String password,
             String password2, ModelMap modelo, @RequestPart MultipartFile archivo) {
 
         try {
@@ -72,6 +73,7 @@ public class InicioControlador {
         }
     }
 
+    // ACTUALIZAR USUARIOs
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN' , 'ROLE_PROFESIONAL')")
     @GetMapping("/actualizarPerfil")
     public String perfil(ModelMap modelo, HttpSession session) {
@@ -80,40 +82,39 @@ public class InicioControlador {
         return "actualizar_usuario.html";
     }
 
-    // ACTUALIZAR USUARIO
-    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN' , 'ROLE_PROFESIONAL')")
     @PostMapping("/actualizarPerfil/{idUsuario}")
     public String actualizarUsuario(
-        @RequestPart MultipartFile archivo,
-        @PathVariable Long idUsuario,
-        @RequestParam String nombreUsuario,
-        @RequestParam String email,
-        @RequestParam String password,
-        @RequestParam String password2,
-        ModelMap modelo) {
+            @RequestPart MultipartFile archivo,
+            @PathVariable Long idUsuario,
+            @RequestParam String nombreUsuario,
+            @RequestParam String email,
+            @RequestParam String password,
+            @RequestParam String password2,
+            ModelMap modelo) {
 
-    try {
-        // Obtener el usuario antes de actualizar
-        Usuario usuario = usuarioServicio.getOne(idUsuario);
+        try {
+            // Obtener el usuario antes de actualizar
+            Usuario usuario = usuarioServicio.getOne(idUsuario);
 
-        // Verificar si el usuario existe
-        if (usuario == null) {
-            throw new Exception("Usuario no encontrado");
+            // Verificar si el usuario existe
+            if (usuario == null) {
+                throw new Exception("Usuario no encontrado");
+            }
+
+            // Actualizar el usuario
+            usuarioServicio.actualizarUsuario(archivo, idUsuario, nombreUsuario, email, password, password2);
+
+            modelo.put("exito", "Usuario actualizado correctamente!");
+
+            return "index.html";
+        } catch (Exception ex) {
+            modelo.put("error", ex.getMessage());
+            modelo.put("nombre", nombreUsuario);
+            modelo.put("email", email);
+
+            return "actualizar_usuario.html";
         }
-
-        // Actualizar el usuario
-        usuarioServicio.actualizarUsuario(archivo, idUsuario, nombreUsuario, email, password, password2);
-
-        modelo.put("exito", "Usuario actualizado correctamente!");
-
-        return "index.html";
-    } catch (Exception ex) {
-        modelo.put("error", ex.getMessage());
-        modelo.put("nombre", nombreUsuario);
-        modelo.put("email", email);
-
-        return "actualizar_usuario.html";
     }
-}
 
 }

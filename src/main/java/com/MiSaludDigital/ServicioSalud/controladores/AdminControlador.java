@@ -31,7 +31,7 @@ public class AdminControlador {
     // REGISTRA DATOS DE UN PROFESIONAL
     @GetMapping("/registrarDatosProfesional")
     public String registrarProfesional() {
-        return "admin/profesional_form.html";
+        return "admin/altaDatos_profesional.html";
     }
 
     @PostMapping("/registroDatosProfesional")

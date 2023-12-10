@@ -40,7 +40,9 @@ public class SeguridadWeb {
                 // Direcciones permitidas
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/admin/*").hasRole("ADMIN");
-                    auth.requestMatchers("/admin/registroUsuarioProfesional").hasRole("ADMIN");// permitir que el form lo ejecute el admin
+                    auth.requestMatchers("/admin/registroUsuarioProfesional").hasRole("ADMIN");// permitir que el form lo ejecute el admin 
+                    //auth.requestMatchers("/profesional/**").hasRole("PROFESIONAL");
+                    //auth.requestMatchers("/paciente/**").hasRole("USER");                                                                     
                     auth.requestMatchers("/*").permitAll();
                     // auth.requestMatchers("/login", "/registrar").permitAll();
                     auth.requestMatchers("/css/*", "/js/*", "/images/*", "/registrar", "/registro")
