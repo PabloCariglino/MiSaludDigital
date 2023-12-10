@@ -34,4 +34,11 @@ public class ProfesionalControlador {
         return "profesional/lista_pacientes";
     }
 
+    //DATOS DEL PROFESIONAL
+    @GetMapping("/datos")
+    public String datosProfesional(){
+
+        return"/profesional/datos_profesional.html";
+    }
+
 }

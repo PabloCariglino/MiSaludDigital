@@ -59,18 +59,18 @@ public class PacienteControlador {
 
     }
 
-    //MUESTRA LOS DATOS DE UN PACIENTE
+    // MUESTRA LOS DATOS DE UN PACIENTE
     @GetMapping("/datos")
     public String datosPaciente() {
 
         return "/paciente/datos_paciente.html";
     }
 
-    //ACTUALIZA LOS DATOS DE UN PACIENTE
+    // ACTUALIZA LOS DATOS DE UN PACIENTE
     @GetMapping("/modificarDatos")
-    public String modificarDatosPaciente(){
+    public String modificarDatosPaciente() {
 
-        return"";
+        return "/paciente/actualizar_datosPaciente.html";
     }
 
     // VISTA PARA SELECCIONAR EL TURNO DEL PACIENTE
@@ -80,4 +80,10 @@ public class PacienteControlador {
         return "/paciente/agendar_turno.html";
     }
 
+    // QUE EL PACIENTE VEA SUS TURNOS ACTIVOS
+    @GetMapping("misTurnos")
+    public String misTurnosPaciente() {
+
+        return "/paciente/misTurnos.html";
+    }
 }
