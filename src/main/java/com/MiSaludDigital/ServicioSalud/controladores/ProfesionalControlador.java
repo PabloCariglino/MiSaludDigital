@@ -14,7 +14,7 @@ public class ProfesionalControlador {
     private ProfesionalServicio profesionalServicio;
 
     // VISTA INICIO DEL PROFESIONAL
-    @GetMapping("/inicioProfesional")
+    @GetMapping("/dashboard")
     public String vistaProfesional() {
 
         return "vistaProfesional.html";
@@ -34,11 +34,31 @@ public class ProfesionalControlador {
         return "profesional/lista_pacientes";
     }
 
-    //DATOS DEL PROFESIONAL
+    // DATOS DEL PROFESIONAL
     @GetMapping("/datos")
-    public String datosProfesional(){
+    public String datosProfesional() {
 
-        return"/profesional/datos_profesional.html";
+        return "/profesional/datos_profesional.html";
     }
 
+    // ACTUALIZAR LOS DATOS DEL PROFESIONAL
+    @GetMapping("/modificarDatos")
+    public String modificarDatosProfesional() {
+
+        return "/profesional/actualizar_datosProfesional.html";
+    }
+
+     // VISTA HISTORIA CLINICA DEL PACIENTE
+    @GetMapping("/historiaClinica")
+    public String historiaClinicaPaciente() {
+
+        return "/profesional/historia_clinica.html";
+    }
+
+    // ACTUALIZAR LA HISTORIA CLINICA DEL PACIENTE
+    @GetMapping("/modificarHistoriaClinica")
+    public String modificarHistoriaClinicaPaciente() {
+
+        return "/profesional/actualizar_historiaclinica.html";
+    }
 }

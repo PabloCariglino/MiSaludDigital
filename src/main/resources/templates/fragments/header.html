@@ -2,7 +2,17 @@
     <div class="header_section" style="font-weight: bold;">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="logo">
-                <a href="/index"><img src="/images/logo2.png" style="max-width: 43px; height: auto;" /></a>
+                <a href="/index"><img src="/images/logo2.png" sec:authorize="!isAuthenticated()"
+                        style="max-width: 43px; height: auto;" /></a>
+                <a href="/paciente/dashboard"><img src="/images/logo2.png"
+                        sec:authorize="isAuthenticated() and hasRole('ROLE_USER')"
+                        style="max-width: 43px; height: auto;" /></a>
+                <a href="/profesional/dashboard"><img src="/images/logo2.png"
+                        sec:authorize="isAuthenticated() and hasRole('ROLE_PROFESIONAL')"
+                        style="max-width: 43px; height: auto;" /></a>
+                <a href="/admin/dashboard"><img src="/images/logo2.png"
+                        sec:authorize="isAuthenticated() and hasRole('ROLE_ADMIN')"
+                        style="max-width: 43px; height: auto;" /></a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,7 +21,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/index">Inicio</a>
+                        <a class="nav-link" href="/index" sec:authorize="!isAuthenticated()">Inicio</a>
+                        <a class="nav-link" href="/paciente/dashboard"
+                            sec:authorize="isAuthenticated() and hasRole('ROLE_USER')">Inicio</a>
+                        <a class="nav-link" href="/profesional/dashboard"
+                            sec:authorize="isAuthenticated() and hasRole('ROLE_PROFESIONAL')">Inicio</a>
+                        <a class="nav-link" href="/admin/dashboard"
+                            sec:authorize="isAuthenticated() and hasRole('ROLE_ADMIN')">Inicio</a>
                     </li>
                     <li class="nav-item" sec:authorize="!isAuthenticated()">
                         <a class="nav-link" href="/registrar">Registro</a>
@@ -55,7 +71,8 @@
                                     Profesional</a></li>
                             <li><a class="dropdown-item" href="/admin/registrarDatosProfesional">Registrar Datos
                                     Profesional</a></li>
-                            <li><a class="dropdown-item" href="/admin/listadoProfesionalesAdmin">Listado Profesionales</a></li>
+                            <li><a class="dropdown-item" href="/admin/listadoProfesionalesAdmin">Listado
+                                    Profesionales</a></li>
                             <li><a class="dropdown-item" href="/admin/listadoPacientesAdmin">Listado Pacientes</a></li>
                         </ul>
                     </li>

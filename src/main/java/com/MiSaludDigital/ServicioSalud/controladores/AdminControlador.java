@@ -22,7 +22,7 @@ public class AdminControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    @GetMapping("/adminDashboard")
+    @GetMapping("/dashboard")
     public String inicioAdmin() {
 
         return "/admin/vistaAdmin.html";
