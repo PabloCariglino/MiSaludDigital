@@ -1,7 +1,12 @@
 package com.MiSaludDigital.ServicioSalud.controladores;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,7 +74,20 @@ public class InicioControlador {
             return "login.html";
         } else {
             modelo.put("exito", "Bienvenido");
-            return "login.html";
+            // Obtener el rol del usuario autenticado
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+            if (authorities.stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_PROFESIONAL"))) {
+                return "/profesional/vistaProfesional.html";
+            } else if (authorities.stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_USER"))) {
+                return "/paciente/vistaPaciente.html";
+            } else if (authorities.stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
+                return "/admin/vistaAdmin.html";
+            } else {
+                // Si no se encuentra un rol válido, puedes redirigir a una página de error o
+                // manejarlo de alguna otra manera
+                return "/login.html";
+            }
         }
     }
 

@@ -44,7 +44,7 @@ public class AdminControlador {
             profesionalServicio.crearProfesional(matriculaProfesional, nombreProfesional, apellidoProfesional,
                     edadProfesional, especialidadProfesional, puntuacionProfesional, precioConsulta);
             modelo.put("exito", "Profesional registrado con éxito");
-            return "/index";
+            return "/admin/vistaAdmin.html";
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
         }
@@ -70,7 +70,7 @@ public class AdminControlador {
 
             modelo.put("exito", "Usuario registrado correctamente!");
 
-            return "index.html";
+            return "/admin/vistaAdmin.html";
         } catch (Exception ex) {
 
             modelo.put("error", ex.getMessage());
@@ -90,7 +90,7 @@ public class AdminControlador {
             return "login.html";
         } else {
             modelo.put("exito", "Bienvenido");
-            return "login.html";
+            return "/admin/vistaAdmin.html";
         }
     }
 

@@ -27,10 +27,8 @@ public class PacienteControlador {
 
     // VISTA INICIAL DEL PACIENTE
     @GetMapping("/dashboard")
-    public String vistaPaciente(ModelMap modelo) {
-        List<Profesional> profesionales = profesionalServicio.listaProfesionales();
-        modelo.addAttribute("profesionales", profesionales);
-
+    public String vistaPaciente() {
+        
         return "/paciente/vistaPaciente.html";
     }
 
@@ -81,9 +79,20 @@ public class PacienteControlador {
     }
 
     // QUE EL PACIENTE VEA SUS TURNOS ACTIVOS
-    @GetMapping("misTurnos")
+    @GetMapping("/misTurnos")
     public String misTurnosPaciente() {
 
         return "/paciente/misTurnos.html";
     }
+
+    // LISTADO DE PROFESIONALES PARA EL PACIENTE
+    @GetMapping("/listadoProfesionales")
+    public String listadoProfesionales(ModelMap modelo) {
+
+        List<Profesional> profesionales = profesionalServicio.listaProfesionales();
+        modelo.addAttribute("profesionales", profesionales);
+
+        return "/paciente/lista_profesionales.html";
+    }
+
 }

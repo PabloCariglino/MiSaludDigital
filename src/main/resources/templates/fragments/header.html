@@ -36,8 +36,8 @@
                         <a class="nav-link" href="/login">Acceder</a>
                     </li>
                     <!--  -->
-                    <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">
-                        <!-- Aca indicamos que si hay sesion activa que se muestre el boton-->
+                    <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_USER')">
+                        <!-- Aca indicamos que si hay sesion activa que se muestre el boton or hasRole('ROLE_ADMIN')-->
                         <!--<a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
                             Paciente</a>-->
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -45,11 +45,11 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/paciente/registrar">Registrarse</a></li>
                             <li><a class="dropdown-item" href="/paciente/datos">Mis datos</a></li>
-                            <li><a class="dropdown-item" href="/paciente/dashboard">Lista profesionales</a></li>
+                            <li><a class="dropdown-item" href="/paciente/listadoProfesionales">Lista profesionales</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_PROFESIONAL') or hasRole('ROLE_ADMIN')">
-                        <!-- Aca indicamos que si hay sesion activa que se muestre el boton-->
+                    <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_PROFESIONAL')">
+                        <!-- Aca indicamos que si hay sesion activa que se muestre el boton or hasRole('ROLE_ADMIN')-->
                         <!--<a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
                             Paciente</a>-->
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

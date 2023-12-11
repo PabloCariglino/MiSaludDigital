@@ -17,7 +17,7 @@ public class ProfesionalControlador {
     @GetMapping("/dashboard")
     public String vistaProfesional() {
 
-        return "vistaProfesional.html";
+        return "profesional/vistaProfesional.html";
     }
 
     // LISTADO DE TURNOS QUE POSEE EL PROFESIONAL
