@@ -13,7 +13,7 @@
 <body>
     <header th:replace="~{fragments/header :: head}"></header>
     <div class="container col-md-4 text-center contenedor-formulario-portal">
-        <form class="mi-formulario" th:action="@{/paciente/registro}" method="post">
+        <form class="mi-formulario" th:action="@{/paciente/registro/__${usuario.idUsuario}__}" method="post">
             <div class="mb-3">
                 <label for="dniPaciente" class="form-label">DNI Paciente</label>
                 <input type="number" class="form-control" id="dniPaciente" name="dniPaciente" />

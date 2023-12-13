@@ -45,7 +45,8 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/paciente/registrar">Registrarse</a></li>
                             <li><a class="dropdown-item" href="/paciente/datos">Mis datos</a></li>
-                            <li><a class="dropdown-item" href="/paciente/listadoProfesionales">Lista profesionales</a></li>
+                            <li><a class="dropdown-item" href="/paciente/listadoProfesionales">Lista profesionales</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_PROFESIONAL')">
@@ -69,11 +70,10 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/admin/registrarUsuarioProfesional">Registrar Usuario
                                     Profesional</a></li>
-                            <li><a class="dropdown-item" href="/admin/registrarDatosProfesional">Registrar Datos
-                                    Profesional</a></li>
                             <li><a class="dropdown-item" href="/admin/listadoProfesionalesAdmin">Lista usuarios
                                     Profesionales</a></li>
-                            <li><a class="dropdown-item" href="/admin/listadoPacientesAdmin">Lista usuarios Pacientes</a></li>
+                            <li><a class="dropdown-item" href="/admin/listadoPacientesAdmin">Lista usuarios
+                                    Pacientes</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown"

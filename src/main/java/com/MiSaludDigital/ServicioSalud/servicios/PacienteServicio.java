@@ -32,7 +32,7 @@ public class PacienteServicio {
     }
 
     // ACTUALIZAR DATOS DE UN PACIENTE
-    public void actualizarDatosPaciente(String id, Long dniPaciente, String nombrePaciente, String ApellidoPaciente,
+    public void actualizarDatosPaciente(Long id, Long dniPaciente, String nombrePaciente, String ApellidoPaciente,
             Date fechaNacimientoPaciente, String obraSocial, Double telContacto, String intencionConsulta) {
 
         Optional<Paciente> respuesta = pacienteRepositorio.findById(id);
@@ -75,12 +75,11 @@ public class PacienteServicio {
      * }
      */
 
-// LISTAR PACIENTES
+    // LISTAR PACIENTES
     public List<Paciente> listaPacientes() {
 
         return (List<Paciente>) pacienteRepositorio.findAll();
     }
-
 
     // BUSCAR PACIENTE POR ID
     public Paciente buscarPacientePorID(Paciente paciente) {
@@ -88,4 +87,13 @@ public class PacienteServicio {
         return pacienteRepositorio.findById(paciente.getId()).orElse(null);
     }
 
+
+    //BUSCAR PACIENTE POR DNI   
+    public Paciente buscarPacientePorDNI(Long dniPaciente){
+
+        Optional<Paciente> respuesta = pacienteRepositorio.findBydniPaciente(dniPaciente);
+
+        Paciente paciente = respuesta.get();
+        return paciente;
+    }
 }

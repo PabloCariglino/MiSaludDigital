@@ -21,6 +21,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.MiSaludDigital.ServicioSalud.entidades.Imagen;
+import com.MiSaludDigital.ServicioSalud.entidades.Paciente;
 import com.MiSaludDigital.ServicioSalud.entidades.Profesional;
 import com.MiSaludDigital.ServicioSalud.entidades.Usuario;
 import com.MiSaludDigital.ServicioSalud.enumeraciones.Rol;
@@ -220,7 +221,7 @@ public class UsuarioServicio implements UserDetailsService {
         return usuario.getRol() == rol;
     }
 
-    // ACTUALIZAR EL PERFIL DEL USUARIO
+    // ACTUALIZAR EL PERFIL DEL USUARIO PROFESIONAL CON LOS DATOS
     @Transactional
     public void actualizarUsuarioProfesionalConDatos(Profesional profesional, Long idUsuario) throws Exception {
 
@@ -230,6 +231,22 @@ public class UsuarioServicio implements UserDetailsService {
             Usuario usuario = respuesta.get();
 
             usuario.setProfesional(profesional);
+
+            usuarioRepositorio.save(usuario);
+        }
+
+    }
+
+    // ACTUALIZAR EL PERFIL DEL USUARIO PACIENTE CON LOS DATOS
+    @Transactional
+    public void actualizarUsuarioPacienteConDatos(Paciente paciente, Long idUsuario) throws Exception {
+
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
+        if (respuesta.isPresent()) {
+
+            Usuario usuario = respuesta.get();
+
+            usuario.setPaciente(paciente);
 
             usuarioRepositorio.save(usuario);
         }

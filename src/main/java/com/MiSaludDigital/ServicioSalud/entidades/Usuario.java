@@ -28,6 +28,9 @@ public class Usuario {
     @OneToOne
     private Profesional profesional;
 
+    @OneToOne
+    private Paciente paciente;
+
     @Enumerated()
     private Rol rol;
 
