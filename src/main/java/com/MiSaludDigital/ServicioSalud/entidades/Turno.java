@@ -18,6 +18,7 @@ public class Turno {
     private Long id;
 
     private LocalDateTime fechaYHora;
+    private Boolean estadoTurno;
 
     @ManyToOne
     private Paciente paciente;  // Relación con Paciente

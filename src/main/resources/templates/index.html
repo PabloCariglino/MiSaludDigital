@@ -15,6 +15,11 @@
 <body>
   <header th:replace="~{fragments/header :: head}"></header>
 
+  <div class="imagen-fondoadmin" sec:authorize="hasRole('ROLE_ADMIN')"></div>
+
+
+  <div class="imagen-fondouser" sec:authorize="hasRole('ROLE_USER')"></div>
+
 
   <div class="container">
 

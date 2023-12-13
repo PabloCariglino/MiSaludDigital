@@ -44,13 +44,13 @@ public class InicioControlador {
     }
 
     @PostMapping("/registroUsuario")
-    public String registro(@RequestParam String nombreUsuario, @RequestParam String email,
+    public String registro(@RequestParam String nombreUsuario, @RequestParam String email, Boolean estadoUsuario,
             @RequestParam String password,
             String password2, ModelMap modelo, @RequestPart MultipartFile archivo) {
 
         try {
 
-            usuarioServicio.registrarUsuario(nombreUsuario, email, password, password2, archivo);
+            usuarioServicio.registrarUsuario(nombreUsuario, email, estadoUsuario, password, password2, archivo);
 
             modelo.put("exito", "Usuario registrado correctamente!");
 
@@ -91,7 +91,7 @@ public class InicioControlador {
         }
     }
 
-    // ACTUALIZAR USUARIOs
+    // ACTUALIZAR USUARIO
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN' , 'ROLE_PROFESIONAL')")
     @GetMapping("/actualizarPerfil")
     public String perfil(ModelMap modelo, HttpSession session) {
@@ -107,6 +107,7 @@ public class InicioControlador {
             @PathVariable Long idUsuario,
             @RequestParam String nombreUsuario,
             @RequestParam String email,
+            Boolean estadoUsuario,
             @RequestParam String password,
             @RequestParam String password2,
             ModelMap modelo) {
@@ -121,11 +122,23 @@ public class InicioControlador {
             }
 
             // Actualizar el usuario
-            usuarioServicio.actualizarUsuario(archivo, idUsuario, nombreUsuario, email, password, password2);
+            usuarioServicio.actualizarUsuario(archivo, idUsuario, nombreUsuario, email, estadoUsuario, password,
+                    password2);
 
             modelo.put("exito", "Usuario actualizado correctamente!");
-
-            return "index.html";
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+            if (authorities.stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_PROFESIONAL"))) {
+                return "/profesional/vistaProfesional.html";
+            } else if (authorities.stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_USER"))) {
+                return "/paciente/vistaPaciente.html";
+            } else if (authorities.stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
+                return "/admin/vistaAdmin.html";
+            } else {
+                // Si no se encuentra un rol válido, puedes redirigir a una página de error o
+                // manejarlo de alguna otra manera
+                return "/actualizar_usuario.html";
+            }
         } catch (Exception ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("nombre", nombreUsuario);

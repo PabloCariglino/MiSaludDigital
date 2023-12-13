@@ -3,6 +3,7 @@ package com.MiSaludDigital.ServicioSalud.servicios;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -20,6 +21,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.MiSaludDigital.ServicioSalud.entidades.Imagen;
+import com.MiSaludDigital.ServicioSalud.entidades.Profesional;
 import com.MiSaludDigital.ServicioSalud.entidades.Usuario;
 import com.MiSaludDigital.ServicioSalud.enumeraciones.Rol;
 import com.MiSaludDigital.ServicioSalud.repositorios.UsuarioRepositorio;
@@ -36,9 +38,10 @@ public class UsuarioServicio implements UserDetailsService {
     @Autowired
     private ImagenServicio imagenServicio;
 
-    // METODO PARA REGISTRO CREACION DE USUARIO
+    // CREAR USUARIO
     @Transactional
-    public void registrarUsuario(String nombreUsuario, String email, String password, String password2,
+    public void registrarUsuario(String nombreUsuario, String email, Boolean estadoUsuario, String password,
+            String password2,
             MultipartFile archivo)
             throws Exception {
 
@@ -48,6 +51,7 @@ public class UsuarioServicio implements UserDetailsService {
 
         usuario.setNombreUsuario(nombreUsuario);
         usuario.setEmail(email);
+        usuario.setEstadoUsuario(true);
         usuario.setPassword(new BCryptPasswordEncoder().encode(password));
 
         // Obtener información de autenticación actual
@@ -78,6 +82,7 @@ public class UsuarioServicio implements UserDetailsService {
     // ACTUALIZAR EL PERFIL DEL USUARIO
     @Transactional
     public void actualizarUsuario(MultipartFile archivo, Long idUsuario, String nombreUsuario, String email,
+            Boolean estadoUsuario,
             String password,
             String password2) throws Exception {
 
@@ -89,6 +94,7 @@ public class UsuarioServicio implements UserDetailsService {
             Usuario usuario = respuesta.get();
             usuario.setNombreUsuario(nombreUsuario);
             usuario.setEmail(email);
+            usuario.setEstadoUsuario(true);
 
             usuario.setPassword(new BCryptPasswordEncoder().encode(password));
 
@@ -114,8 +120,8 @@ public class UsuarioServicio implements UserDetailsService {
         return usuarioRepositorio.getOne(id);
     }
 
-    // LISTAR Usuarios
-    public List<Usuario> ListarUsuarios() {
+    // LISTAR TODOS los Usuarios
+    public List<Usuario> ListaTotalUsuarios() {
 
         List<Usuario> usuarios = new ArrayList<>();
         usuarios = usuarioRepositorio.findAll();
@@ -123,18 +129,24 @@ public class UsuarioServicio implements UserDetailsService {
 
     }
 
-    // ELIMINAR Usuarios
-    /*
-     * public void eliminarUsuario(Long id) {
-     * Optional<Usuario> validacion = usuarioRepositorio.findById(id);
-     * if (validacion.isPresent()) {
-     * Usuario usuario = validacion.get();
-     * usuario.setAlta(false);
-     * usuarioRepositorio.save(usuario);
-     * 
-     * }
-     * }
-     */
+    // LISTAR Usuarios paciente
+    public List<Usuario> ListaUsuariosPacientes() {
+
+        List<Usuario> usuarios = new ArrayList<>();
+        usuarios = usuarioRepositorio.findAll();
+        return usuarios;
+    }
+
+    // DAR DE BAJA USUARIOS/ELIMINAR Usuarios
+    public void bajaDeUsuario(Long id) {
+        Optional<Usuario> validacion = usuarioRepositorio.findById(id);
+        if (validacion.isPresent()) {
+            Usuario usuario = validacion.get();
+            usuario.setEstadoUsuario(false);
+            usuarioRepositorio.save(usuario);
+
+        }
+    }
 
     // VALIDACION PARA REGISTRO DE USUARIO
     private void validar(String nombre, String email, String password, String password2) throws Exception {
@@ -185,6 +197,43 @@ public class UsuarioServicio implements UserDetailsService {
     public Usuario getUsuarioConImagen(Long id) {
         return usuarioRepositorio.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
+    }
+
+    // DEVUELVEN LISTA DE USUARIOS USER Y USUARIOS PROFESIONAL
+    public List<Usuario> listaUsuariosConRolUser() {
+        List<Usuario> usuarios = usuarioRepositorio.findAll();
+        return filtrarUsuariosPorRol(usuarios, Rol.USER);
+    }
+
+    public List<Usuario> listaUsuariosConRolProfesional() {
+        List<Usuario> usuarios = usuarioRepositorio.findAll();
+        return filtrarUsuariosPorRol(usuarios, Rol.PROFESIONAL);
+    }
+
+    private List<Usuario> filtrarUsuariosPorRol(List<Usuario> usuarios, Rol rol) {
+        return usuarios.stream()
+                .filter(usuario -> tieneRol(usuario, rol))
+                .collect(Collectors.toList());
+    }
+
+    private boolean tieneRol(Usuario usuario, Rol rol) {
+        return usuario.getRol() == rol;
+    }
+
+    // ACTUALIZAR EL PERFIL DEL USUARIO
+    @Transactional
+    public void actualizarUsuarioProfesionalConDatos(Profesional profesional, Long idUsuario) throws Exception {
+
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
+        if (respuesta.isPresent()) {
+
+            Usuario usuario = respuesta.get();
+
+            usuario.setProfesional(profesional);
+
+            usuarioRepositorio.save(usuario);
+        }
+
     }
 
 }

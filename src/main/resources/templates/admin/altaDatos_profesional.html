@@ -16,7 +16,7 @@
     <header th:replace="~{fragments/header :: head}"></header>
 
     <div class="container col-md-4 text-center">
-        <form th:action="@{/admin/registroDatosProfesional}" method="post">
+        <form th:action="@{/admin/registroDatosProfesional/__${usuario.idUsuario}__}" method="post">
             <div class="mb-3">
                 <label for="matriculaProfesional" class="form-label">matriculaProfesional</label>
                 <input type="number" class="form-control" id="matriculaProfesional" name="matriculaProfesional" />
@@ -44,6 +44,10 @@
             <div class="mb-3">
                 <label for="precioConsulta" class="form-label">precioConsulta</label>
                 <input type="number" class="form-control" id="precioConsulta" name="precioConsulta" />
+            </div>
+            <div class="mb-3">
+                <label for="caracteristicaDeOferta" class="form-label">Caracteristica de oferta</label>
+                <input type="text" class="form-control" id="caracteristicaDeOferta" name="caracteristicaDeOferta" />
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

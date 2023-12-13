@@ -14,6 +14,37 @@
 <body>
     <header th:replace="~{fragments/header :: head}"></header>
 
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id usuario paciente</th>
+                <th scope="col">Nombre del usuario paciente</th>
+                <th scope="col">password</th>
+                <th scope="col">Email</th>
+                <th scope="col">Estado del usuario</th>
+               
+            </tr>
+        </thead>
+
+
+        <tbody th:each="usuario: ${usuariosPacientes}">
+            <tr>
+                <th scope="row" th:text="${usuario.idUsuario}"></th>
+
+                <td th:text="${usuario.nombreUsuario}"></td>
+                <td th:text="${usuario.password}"></td>
+                <td th:text="${usuario.email}"></td>
+                <td th:text="${usuario.estadoUsuario}"></td>
+            
+            </tr>
+
+        </tbody>
+
+
+    </table>
+
+
+
 
 
     <footer th:replace="~{fragments/footer :: footer}"></footer>

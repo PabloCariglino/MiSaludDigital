@@ -1,6 +1,8 @@
 package com.MiSaludDigital.ServicioSalud.servicios;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ public class PacienteServicio {
     @Autowired
     private PacienteRepositorio pacienteRepositorio;
 
+    // CREAR DATOS DE UN PACIENTE
     public Paciente crearPaciente(Long dniPaciente, String nombrePaciente, String ApellidoPaciente,
             Date fechaNacimientoPaciente, String obraSocial, Double telContacto, String intencionConsulta) {
 
@@ -28,24 +31,61 @@ public class PacienteServicio {
         return pacienteRepositorio.save(paciente);
     }
 
- 
+    // ACTUALIZAR DATOS DE UN PACIENTE
+    public void actualizarDatosPaciente(String id, Long dniPaciente, String nombrePaciente, String ApellidoPaciente,
+            Date fechaNacimientoPaciente, String obraSocial, Double telContacto, String intencionConsulta) {
+
+        Optional<Paciente> respuesta = pacienteRepositorio.findById(id);
+
+        if (respuesta.isPresent()) {
+
+            Paciente paciente = respuesta.get();
+
+            paciente.setDniPaciente(dniPaciente);
+            paciente.setNombrePaciente(nombrePaciente);
+            paciente.setApellidoPaciente(ApellidoPaciente);
+            paciente.setFechaNacimientoPaciente(fechaNacimientoPaciente);
+            paciente.setObraSocial(obraSocial);
+            paciente.setTelContacto(telContacto);
+            paciente.setIntencionConsulta(intencionConsulta);
+
+            pacienteRepositorio.save(paciente);
+
+        }
+
+    }
+
     // GUARDAR PACIENTE
     public void guardar(Paciente paciente) {
 
         pacienteRepositorio.save(paciente);
     }
 
-    // ELIMINAR PACIENTE
-    public void eliminar(Paciente paciente) {
+    /*
+     * // DAR DE BAJA PACIENTE/ELIMINAR Pacientes // SE ELIMINAN EN EL SERVICIO
+     * USUARIO POR ROLES
+     * public void bajaDePaciente(String id) {
+     * Optional<Paciente> validacion = pacienteRepositorio.findById(id);
+     * if (validacion.isPresent()) {
+     * Paciente paciente = validacion.get();
+     * 
+     * pacienteRepositorio.save(paciente);
+     * 
+     * }
+     * }
+     */
 
-        pacienteRepositorio.delete(paciente);
+// LISTAR PACIENTES
+    public List<Paciente> listaPacientes() {
+
+        return (List<Paciente>) pacienteRepositorio.findAll();
     }
 
-    // BUSCAR PROFESIONAL POR ID
 
-    /* public Paciente buscarPaciente(Paciente paciente) {
+    // BUSCAR PACIENTE POR ID
+    public Paciente buscarPacientePorID(Paciente paciente) {
 
-        return pacienteRepositorio.findById(paciente.getMatriculaProfesional()).orElse(null);
-    }*/
-    
+        return pacienteRepositorio.findById(paciente.getId()).orElse(null);
+    }
+
 }

@@ -16,10 +16,10 @@ import com.MiSaludDigital.ServicioSalud.servicios.UsuarioServicio;
 @Controller
 @RequestMapping("/imagen")
 public class ImagenControlador {
-
+    
+    @Autowired
     private final UsuarioServicio usuarioServicio;
 
-    @Autowired
     public ImagenControlador(UsuarioServicio usuarioServicio) {
         this.usuarioServicio = usuarioServicio;
     }
@@ -45,4 +45,5 @@ public class ImagenControlador {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
+
 

@@ -23,7 +23,10 @@ public class Usuario {
     private String nombreUsuario;
     private String password;
     private String email;
-    // private Boolean estadoUsuario;
+    private Boolean estadoUsuario;
+
+    @OneToOne
+    private Profesional profesional;
 
     @Enumerated()
     private Rol rol;
