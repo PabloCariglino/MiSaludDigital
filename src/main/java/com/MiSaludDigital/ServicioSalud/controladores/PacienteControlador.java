@@ -64,7 +64,7 @@ public class PacienteControlador {
        obraSocial, telContacto, intencionConsulta);
 
             Paciente paciente = pacienteServicio.buscarPacientePorDNI(dniPaciente);
-            usuarioServicio.actualizarUsuarioPacienteConDatos(paciente, dniPaciente);
+            usuarioServicio.actualizarUsuarioPacienteConDatos(paciente, id);
 
             // pacienteServicio.crearPaciente(dniPaciente, nombrePaciente, ApellidoPaciente,
             // fechaDate, obraSocial,
