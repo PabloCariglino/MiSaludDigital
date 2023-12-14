@@ -1,11 +1,16 @@
 package com.MiSaludDigital.ServicioSalud.controladores;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.MiSaludDigital.ServicioSalud.entidades.Usuario;
 import com.MiSaludDigital.ServicioSalud.servicios.ProfesionalServicio;
+import com.MiSaludDigital.ServicioSalud.servicios.UsuarioServicio;
 
 @Controller
 @RequestMapping("/profesional")
@@ -13,6 +18,8 @@ public class ProfesionalControlador {
     @Autowired
     private ProfesionalServicio profesionalServicio;
 
+
+    
     // VISTA INICIO DEL PROFESIONAL
     @GetMapping("/dashboard")
     public String vistaProfesional() {
@@ -29,7 +36,9 @@ public class ProfesionalControlador {
 
     // LISTADO DE PACIENTES QUE POSEE EL PROFESIONAL
     @GetMapping("/listadoPacientes")
-    public String listadoPacientes() {
+    public String listadoPacientes(ModelMap modelo) {
+        List<Usuario>usuariosPaciente = UsuarioServicio.
+
 
         return "profesional/lista_pacientes";
     }
