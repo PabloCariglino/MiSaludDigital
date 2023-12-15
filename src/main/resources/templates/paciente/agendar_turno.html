@@ -14,12 +14,29 @@
 <body>
     <header th:replace="~{fragments/header :: head}"></header>
 
-    <form action="/paciente/selectTurno" method="post">
-        <input type="hidden" name="dniPaciente" value="${usuario.id}">
-        <!-- Otros campos del formulario (profesional, fecha, hora) -->
-    
-        <button type="submit">Reservar Turno</button>
+    <h2>Solicitud de Turno</h2>
+
+    <form method="post" action="/turnos/solicitar">
+        <label for="especialidad">Especialidad:</label>
+        <select id="especialidad" name="especialidad">
+            <option th:each="especialidad : ${especialidades}" th:value="${especialidad}" th:text="${especialidad}"></option>
+        </select>
+
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha" required>
+
+        <label for="hora">Hora:</label>
+        <input type="time" id="hora" name="hora" required>
+
+        <button type="submit">Solicitar Turno</button>
     </form>
+
+    <p th:text="${exito}" style="color: green"></p>
+    <p th:text="${error}" style="color: red"></p>
+
+    <!-- Mensajes de éxito o error -->
+    <p th:text="${exito}" style="color: green"></p>
+    <p th:text="${error}" style="color: red"></p>
 
 
     

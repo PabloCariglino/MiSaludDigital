@@ -1,6 +1,6 @@
 package com.MiSaludDigital.ServicioSalud.servicios;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.MiSaludDigital.ServicioSalud.entidades.Paciente;
-import com.MiSaludDigital.ServicioSalud.entidades.Profesional;
 import com.MiSaludDigital.ServicioSalud.entidades.Turno;
 import com.MiSaludDigital.ServicioSalud.repositorios.TurnoRepositorio;
 
@@ -24,21 +23,24 @@ public class TurnoServicio {
     @Autowired
     ProfesionalServicio profesionalServicio;
 
-    public void reservarTurno(Long dniPaciente, Long profesionalId, Date fecha, LocalTime hora) {
-        // Puedes agregar lógica de validación de disponibilidad de turnos aquí
-       
-        Paciente pc = pacienteServicio.buscarPacientePorDNI(dniPaciente);
-        Profesional pf = profesionalServicio.buscarProfesional(profesionalId);
-       
+    public Turno solicitarTurno(Paciente paciente, LocalDate fecha, LocalTime hora, String especialidad) {
+        // Lógica para crear y guardar el turno en la base de datos
+        // estado del turno (pendiente, confirmado, etc.)
         Turno turno = new Turno();
-        turno.setPaciente(pc); // Crea una instancia de Paciente con el ID
-        turno.setProfesional(pf); // Crea una instancia de Profesional con el ID
+        turno.setPaciente(paciente);
         turno.setFecha(fecha);
         turno.setHora(hora);
-
-        turnoRepositorio.save(turno);
+        turno.setEspecialidad(especialidad);
+        turno.setEstadoTurno(false); // Estado inicial Guardar el turno en la base de datos
+        return turnoRepositorio.save(turno);
     }
 
+
+
+
+
+
+    
     // Obtener todos los turnos
     public List<Turno> obtenerTodosLosTurnos() {
         return turnoRepositorio.findAll();

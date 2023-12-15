@@ -1,6 +1,5 @@
 package com.MiSaludDigital.ServicioSalud.controladores;
 
-import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.MiSaludDigital.ServicioSalud.entidades.Paciente;
 import com.MiSaludDigital.ServicioSalud.entidades.Profesional;
-import com.MiSaludDigital.ServicioSalud.entidades.Turno;
 import com.MiSaludDigital.ServicioSalud.entidades.Usuario;
 import com.MiSaludDigital.ServicioSalud.servicios.PacienteServicio;
 import com.MiSaludDigital.ServicioSalud.servicios.ProfesionalServicio;
@@ -102,34 +100,7 @@ public class PacienteControlador {
         return "/paciente/actualizar_datosPaciente.html";
     }
 
-    // VISTA PARA SELECCIONAR EL TURNO DEL PACIENTE
-    @GetMapping("/selectTurno")
-    public String sacarTurno(@RequestParam Long dniPaciente, @RequestParam Long matricula,
-                                @RequestParam("fecha") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha,
-                                @RequestParam("hora") LocalTime hora, ModelMap modelo) {
-        // Lógica para reservar el turno
-        // Puedes validar la disponibilidad del turno, etc.
-
-        // Ejemplo de cómo guardar un nuevo turno
-        Turno turno = new Turno();
-        turno.setPaciente(pacienteServicio.buscarPacientePorDNI(dniPaciente));
-        turno.setProfesional(profesionalServicio.buscarProfesional(matricula));
-        turno.setFecha(fecha);
-        turno.setHora(hora);
-
-        turnoServicio.guardarTurno(turno);
-
-        modelo.put("exito", "Turno reservado con éxito");
-        
-        return "/paciente/agendar_turno.html";
-    }
-
-    // QUE EL PACIENTE VEA SUS TURNOS ACTIVOS
-    @GetMapping("/misTurnos")
-    public String misTurnosPaciente() {
-
-        return "/paciente/misTurnos.html";
-    }
+   
 
     // LISTADO DE PROFESIONALES PARA EL PACIENTE
     @GetMapping("/listadoProfesionales")
