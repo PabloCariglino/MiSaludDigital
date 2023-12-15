@@ -1,10 +1,12 @@
 package com.MiSaludDigital.ServicioSalud.controladores;
 
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.MiSaludDigital.ServicioSalud.entidades.Paciente;
 import com.MiSaludDigital.ServicioSalud.entidades.Profesional;
+import com.MiSaludDigital.ServicioSalud.entidades.Turno;
 import com.MiSaludDigital.ServicioSalud.entidades.Usuario;
 import com.MiSaludDigital.ServicioSalud.servicios.PacienteServicio;
 import com.MiSaludDigital.ServicioSalud.servicios.ProfesionalServicio;
+import com.MiSaludDigital.ServicioSalud.servicios.TurnoServicio;
 import com.MiSaludDigital.ServicioSalud.servicios.UsuarioServicio;
 
 import jakarta.servlet.http.HttpSession;
@@ -33,6 +37,9 @@ public class PacienteControlador {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
+
+    @Autowired
+    private TurnoServicio turnoServicio;
 
     // VISTA INICIAL DEL PACIENTE
     @GetMapping("/dashboard")
@@ -79,14 +86,18 @@ public class PacienteControlador {
     }
 
     // MUESTRA LOS DATOS DE UN PACIENTE
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
     @GetMapping("/datos")
-    public String datosPaciente() {
+    public String datosPaciente(ModelMap modelo, HttpSession session) {
+        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        modelo.put("usuario", usuario);
+
 
         return "/paciente/datos_paciente.html";
     }
 
     // ACTUALIZA LOS DATOS DE UN PACIENTE
-    @GetMapping("/modificarDatos")
+    @PostMapping("/modificarDatos")
     public String modificarDatosPaciente() {
 
         return "/paciente/actualizar_datosPaciente.html";
@@ -94,8 +105,23 @@ public class PacienteControlador {
 
     // VISTA PARA SELECCIONAR EL TURNO DEL PACIENTE
     @GetMapping("/selectTurno")
-    public String sacarTurno() {
+    public String sacarTurno(@RequestParam Long dniPaciente, @RequestParam Long matricula,
+                                @RequestParam("fecha") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha,
+                                @RequestParam("hora") LocalTime hora, ModelMap modelo) {
+        // Lógica para reservar el turno
+        // Puedes validar la disponibilidad del turno, etc.
 
+        // Ejemplo de cómo guardar un nuevo turno
+        Turno turno = new Turno();
+        turno.setPaciente(pacienteServicio.buscarPacientePorDNI(dniPaciente));
+        turno.setProfesional(profesionalServicio.buscarProfesional(matricula));
+        turno.setFecha(fecha);
+        turno.setHora(hora);
+
+        turnoServicio.guardarTurno(turno);
+
+        modelo.put("exito", "Turno reservado con éxito");
+        
         return "/paciente/agendar_turno.html";
     }
 

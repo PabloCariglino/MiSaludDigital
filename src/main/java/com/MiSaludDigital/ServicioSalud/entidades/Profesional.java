@@ -32,8 +32,8 @@ public class Profesional {
     private double precioConsulta;
     private String caracteristicaDeOferta; // (telemedicina, presencial, ubicación, obras sociales, datos de contacto).
 
-    // @OneToMany
-    // private List<Turno> turnos;
+    @OneToMany
+    private List<Turno> turnos;
 
     @OneToMany
     private List<HistoriaClinica> historiaClinicas;
