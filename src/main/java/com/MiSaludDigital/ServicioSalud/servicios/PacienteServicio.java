@@ -98,10 +98,10 @@ public class PacienteServicio {
     }
 
     // ACTUALIZAR PACIENTE CON SU HISTORIA CLINICA
-    // le pasamos un paciente actualizado y le seteamos la lista de la historia
+    // le pasamos un paciente y le seteamos la lista de la historia
     // clinica al paciente
-    public void actualizarDatosPacienteConHistoriaClinica(Paciente pacienteConHC, Long dniPaciente,
-            HistoriaClinica historiaClinica) {
+    public void actualizarDatosPacienteConHistoriaClinica( Long dniPaciente,
+            List<HistoriaClinica> historiaClinicas) {
 
         Optional<Paciente> respuesta = pacienteRepositorio.findBydniPaciente(dniPaciente);
 
@@ -109,7 +109,7 @@ public class PacienteServicio {
 
             Paciente paciente = respuesta.get();
 
-            paciente.setHistoriaClinicas(pacienteConHC.getHistoriaClinicas());
+            paciente.setHistoriaClinicas(historiaClinicas);
 
             pacienteRepositorio.save(paciente);
 

@@ -79,8 +79,16 @@ public class ProfesionalControlador {
     }
 
     // VISTA HISTORIA CLINICA DEL PACIENTE
-    @GetMapping("/historiaClinica")
-    public String historiaClinicaPaciente() {
+    @GetMapping("/historiaClinica/{id}")
+    public String historiaClinicaPaciente(@PathVariable Long id, ModelMap modelo) {
+
+        try {
+            
+            List<HistoriaClinica> listaHC = historiaClinicaServicio.listarHistoriasClinicas();
+            modelo.put("listaHC", listaHC);
+        } catch (Exception e) {
+            
+        }
 
         return "/profesional/vista_historia_clinica.html";
     }
@@ -127,7 +135,8 @@ public class ProfesionalControlador {
 
             listaHistoriaClinicas.add(hc);
 
-            paciente.setHistoriaClinicas(listaHistoriaClinicas);
+            pacienteServicio.actualizarDatosPacienteConHistoriaClinica( paciente.getDniPaciente(), listaHistoriaClinicas);
+            //paciente.setHistoriaClinicas(listaHistoriaClinicas);
 
             // pacienteServicio.actualizarDatosPacienteConHistoriaClinica(paciente,
             // paciente.getDniPaciente());
