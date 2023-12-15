@@ -14,9 +14,13 @@
 <body>
     <header th:replace="~{fragments/header :: head}"></header>
 
-    <div class="container-fluid m-5 contenedor">
+    <div class="imagen-fondoadmin" sec:authorize="hasRole('ROLE_ADMIN')"></div>
+    <div class="imagen-fondouser" sec:authorize="hasRole('ROLE_USER')"></div>
+    
+    <div class="contenedor-formulario-usuario">
 
-        <form class="formulario" th:action="${usuario != null ? '/actualizarPerfil/' + usuario.idUsuario : ''}" 
+        <form class="mi-formulario-usuario" th:action="${usuario != null ? '/actualizarPerfil/' + usuario.idUsuario : ''}" 
+        
         method="POST" enctype="multipart/form-data">
 
 

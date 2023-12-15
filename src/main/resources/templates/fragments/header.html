@@ -4,6 +4,7 @@
             <div class="logo">
                 <a href="/index"><img src="/images/logo2.png" sec:authorize="!isAuthenticated()"
                         style="max-width: 43px; height: auto; display: flex; margin-left: 5px;" /></a>
+                        <span class="navbar-brand">Mi Salud Digital</span>
                 <a href="/paciente/dashboard"><img src="/images/logo2.png"
                         sec:authorize="isAuthenticated() and hasRole('ROLE_USER')"
                         style="max-width: 43px; height: auto;" /></a>

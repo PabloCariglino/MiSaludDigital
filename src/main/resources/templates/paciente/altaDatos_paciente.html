@@ -13,34 +13,36 @@
 <body>
     <header th:replace="~{fragments/header :: head}"></header>
     <div class="container col-md-4 text-center contenedor-formulario-portal">
+        
         <form class="mi-formulario" th:action="@{/paciente/registro}" method="post">
+            <h2>Datos Paciente</h2>
             <div class="mb-3">
-                <label for="dniPaciente" class="form-label">DNI Paciente</label>
-                <input type="number" class="form-control" id="dniPaciente" name="dniPaciente" />
+                
+                <input type="number" class="form-control" id="dniPaciente" name="dniPaciente"placeholder="DNI Paciente" />
             </div>
             <div class="mb-3">
-                <label for="nombrePaciente" class="form-label">Nombre Paciente</label>
-                <input type="text" class="form-control" id="nombrePaciente" name="nombrePaciente" />
+
+                <input type="text" class="form-control" id="nombrePaciente" name="nombrePaciente" placeholder="Nombre Paciente"/>
             </div>
             <div class="mb-3">
-                <label for="ApellidoPaciente" class="form-label">Apellido Paciente</label>
-                <input type="text" class="form-control" id="ApellidoPaciente" name="ApellidoPaciente" />
+
+                <input type="text" class="form-control" id="ApellidoPaciente" name="ApellidoPaciente" placeholder="Apellido Paciente"/>
             </div>
             <div class="mb-3">
                 <label for="fechaNacimientoPaciente" class="form-label">Fecha Nacimiento</label>
-                <input type="date" class="form-control" id="fechaNacimientoPaciente" name="fechaNacimientoPaciente" />
+                <input type="date" class="form-control" id="fechaNacimientoPaciente" name="fechaNacimientoPaciente" placeholder="Fecha Nacimiento"/>
             </div>
             <div class="mb-3">
-                <label for="obraSocial" class="form-label">Obra Social</label>
-                <input type="text" class="form-control" id="obraSocial" name="obraSocial" />
+         
+                <input type="text" class="form-control" id="obraSocial" name="obraSocial" placeholder="Obra Social"/>
             </div>
             <div class="mb-3">
-                <label for="telContacto" class="form-label">Tel Contacto</label>
-                <input type="tel" class="form-control" id="telContacto" name="telContacto" />
+         
+                <input type="tel" class="form-control" id="telContacto" name="telContacto" placeholder="Telf. Contacto"/>
             </div>
             <div class="mb-3">
-                <label for="intencionConsulta" class="form-label">Comentarios</label>
-                <input type="text" class="form-control" id="intencionConsulta" name="intencionConsulta" />
+
+                <input type="text" class="form-control" id="intencionConsulta" name="intencionConsulta" placeholder="Comentarios"/>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
