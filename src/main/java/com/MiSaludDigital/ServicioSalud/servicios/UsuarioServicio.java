@@ -253,4 +253,13 @@ public class UsuarioServicio implements UserDetailsService {
 
     }
 
+//OBTENER USUARIO ACTUAL AUTENTICADO en el inicio de session actual
+    public Usuario obtenerUsuarioAutenticado() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof Usuario) {
+            return (Usuario) authentication.getPrincipal();
+        }
+        return null; // o lanza una excepción si prefieres manejar el caso en que no hay usuario autenticado
+    }
+
 }

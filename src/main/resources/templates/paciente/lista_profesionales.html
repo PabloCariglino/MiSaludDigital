@@ -36,6 +36,7 @@
         <tbody th:each="profesional : ${profesionales}">
             <tr>
                 <th scope="row" th:text="${profesional.id}"></th>
+                
 
                 <td th:text="${profesional.matriculaProfesional}"></td>
                 <td th:text="${profesional.nombreProfesional}"></td>
@@ -45,7 +46,7 @@
                 <td th:text="${profesional.puntuacionProfesional}"></td>
                 <td th:text="${profesional.precioConsulta}"></td>
                 <td th:text="${profesional.caracteristicaDeOferta}"></td>
-                <td ><a th:href="@{/paciente/agrendar_turno/__${usuario.idUsuario}__}">Registar</a></td>
+               <!--</tr><td ><a th:href="@{/paciente/agrendar_turno/__${usuario.idUsuario}__}">Registar</a></td>-->
             </tr>
 
         </tbody>

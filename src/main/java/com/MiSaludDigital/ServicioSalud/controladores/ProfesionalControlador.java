@@ -95,8 +95,9 @@ public class ProfesionalControlador {
     // REGISTRA HISTORIA CLINICA DE UN PACIENTE
     @GetMapping("/registrarHistoriaClinicaPaciente/{id}")
     public String registrarHistoriaClinicaPaciente(@PathVariable Long id, ModelMap modelo) {
-        modelo.put("usuario", usuarioServicio.getOne(id)); // inyectamos mediante la llave usuario el usuario a
-                                                           // modificar (especialidad)
+        
+        modelo.put("usuario", usuarioServicio.getOne(id)); // inyectamos mediante la llave usuario el usuario a modificar (especialidad)
+                                                           
         return "profesional/alta_historia_clinica.html";
     }
 

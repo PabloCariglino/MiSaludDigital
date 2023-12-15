@@ -22,6 +22,9 @@ public class ProfesionalServicio {
     @Autowired
     private HistoriaClinicaRepositorio historiaClinicaRepositorio;
 
+    @Autowired
+    private UsuarioServicio usuarioServicio;
+
     // CREAR PROFESIONAL datos
     public Profesional crearProfesional(Long matriculaProfesional, String nombreProfesional, String apellidoProfesional,
             int edadProfesional,
@@ -111,8 +114,17 @@ public class ProfesionalServicio {
             Date fechaDeAtencion,
             String prepaga) {
 
+        // Obtener el usuario profesional actualmente autenticado
+       // Usuario usuarioProfesional = usuarioServicio.obtenerUsuarioAutenticado();
+       // Profesional profesional = usuarioProfesional.getProfesional();
+
+        // Validar si el usuario autenticado tiene el rol de Profesional
+       // if (profesional == null) {
+       //     throw new IllegalStateException("El usuario autenticado no es un profesional.");
+       // }
+
         HistoriaClinica historiaClinica = new HistoriaClinica();
-        //paciente.setHistoriaClinicas(null);
+        // paciente.setHistoriaClinicas(null);
 
         historiaClinica.setPaciente(paciente);
 

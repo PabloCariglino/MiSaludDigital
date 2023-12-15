@@ -53,7 +53,6 @@ public class PacienteControlador {
     public String registrarPaciente(HttpSession session, ModelMap modelo) {
         Usuario usuario = (Usuario) session.getAttribute("usuariosession");
         modelo.put("usuario", usuario);
-
         // modelo.put("usuario", usuarioServicio.getOne(id));
         return "/paciente/altaDatos_paciente.html";
     }
@@ -139,7 +138,7 @@ public class PacienteControlador {
         List<Profesional> profesionales = profesionalServicio.listaProfesionales();
         modelo.addAttribute("profesionales", profesionales);
 
-        return "/paciente/lista_profesionales.html";
+        return "paciente/lista_profesionales.html";
     }
 
 }
