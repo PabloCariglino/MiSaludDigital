@@ -8,7 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Data;
@@ -35,8 +34,8 @@ public class Paciente {
     private Double telContacto;
     private String intencionConsulta;
 
-    @OneToOne
-    private HistoriaClinica historiaClinicas;
+    @OneToMany
+    private List<HistoriaClinica> historiaClinicas;
 
     @OneToMany
     private List<Turno> turnos;

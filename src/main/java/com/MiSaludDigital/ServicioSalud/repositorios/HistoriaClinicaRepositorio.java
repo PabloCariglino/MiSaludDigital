@@ -5,8 +5,13 @@ import org.springframework.stereotype.Repository;
 
 import com.MiSaludDigital.ServicioSalud.entidades.HistoriaClinica;
 
+
+
 @Repository
 public interface HistoriaClinicaRepositorio extends JpaRepository<HistoriaClinica,Long>{
     
+   // Optional<HistoriaClinica> findByIdHistoriaClinica(Long id);
+
+    //Optional findByDNIPacienteHC(Paciente paciente);
     
 }

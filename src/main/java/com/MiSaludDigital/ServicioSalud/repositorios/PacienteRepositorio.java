@@ -15,4 +15,5 @@ public interface PacienteRepositorio extends JpaRepository<Paciente,Long>{
     //Optional<Paciente> buscarPorDNIPaciente(@Param("dniPacientel") Long dniPaciente);
 
     Optional<Paciente> findBydniPaciente(Long dniPaciente);
+
 }

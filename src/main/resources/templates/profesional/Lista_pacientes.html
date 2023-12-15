@@ -14,39 +14,53 @@
 <body>
     <header th:replace="~{fragments/header :: head}"></header>
 
-<div>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">dni paciente</th>
+    <div>
+        <Br>
+
+        <h1 style="color:white">LISTADO DE USUARIOS PACIENTES</h1>
+
+        <Br>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+
+                    <th scope="col">Id usuario paciente</th>
+                    <th scope="col">Nombre del usuario paciente</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Estado del usuario</th>
+                    <th scope="col">Registrar historia clinica</th>
+                    <th scope="col">Ver historia clinica</th>
+
+                    <!--<th scope="col">dni paciente</th>
                 <th scope="col">Nombre paciente</th>
                 <th scope="col">apellido paciente</th>
                 <th scope="col">fecha de naciemiento</th>
                 <th scope="col">obra social</th>
                 <th scope="col">tel</th>
                 <th scope="col">intencion consulta</th>
-                <th scope="col">historia clinica</th>
-            </tr>
-        </thead>
+                <th scope="col">historia clinica</th>-->
+                </tr>
+            </thead>
 
 
-        <tbody th:each="usuario: ${usuariosProfesionales}">
-            <tr>
-                <th scope="row" th:text="${usuario.idUsuario}"></th>
+            <tbody th:each="usuario: ${usuariosPacientes}">
+                <tr>
+                    <th scope="row" th:text="${usuario.idUsuario}"></th>
 
-                <td th:text="${usuario.nombreUsuario}"></td>
-                <td th:text="${usuario.password}"></td>
-                <td th:text="${usuario.email}"></td>
-                <td th:text="${usuario.estadoUsuario}"></td>
-                <td ><a th:href="@{/admin/registrarDatosProfesional/__${usuario.idUsuario}__}">RD</a></td>
-            </tr>
+                    <td th:text="${usuario.nombreUsuario}"></td>
 
-        </tbody>
+                    <td th:text="${usuario.email}"></td>
+                    <td th:text="${usuario.estadoUsuario}"></td>
+                    <td><a th:href="@{/profesional/registrarHistoriaClinicaPaciente/__${usuario.idUsuario}__}">RHC</a></td>
+                    <td><a th:href="@{/profesional/historiaClinica/__${usuario.idUsuario}__}">VER</a></td>
+                </tr>
+
+            </tbody>
 
 
-    </table>
+        </table>
 
-</div>
+    </div>
 
 
 

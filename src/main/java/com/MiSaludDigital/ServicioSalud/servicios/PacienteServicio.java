@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.MiSaludDigital.ServicioSalud.entidades.HistoriaClinica;
 import com.MiSaludDigital.ServicioSalud.entidades.Paciente;
 import com.MiSaludDigital.ServicioSalud.repositorios.PacienteRepositorio;
 
@@ -87,13 +88,32 @@ public class PacienteServicio {
         return pacienteRepositorio.findById(paciente.getId()).orElse(null);
     }
 
-
-    //BUSCAR PACIENTE POR DNI   
-    public Paciente buscarPacientePorDNI(Long dniPaciente){
+    // BUSCAR PACIENTE POR DNI
+    public Paciente buscarPacientePorDNI(Long dniPaciente) {
 
         Optional<Paciente> respuesta = pacienteRepositorio.findBydniPaciente(dniPaciente);
 
         Paciente paciente = respuesta.get();
         return paciente;
+    }
+
+    // ACTUALIZAR PACIENTE CON SU HISTORIA CLINICA
+    // le pasamos un paciente actualizado y le seteamos la lista de la historia
+    // clinica al paciente
+    public void actualizarDatosPacienteConHistoriaClinica(Paciente pacienteConHC, Long dniPaciente,
+            HistoriaClinica historiaClinica) {
+
+        Optional<Paciente> respuesta = pacienteRepositorio.findBydniPaciente(dniPaciente);
+
+        if (respuesta.isPresent()) {
+
+            Paciente paciente = respuesta.get();
+
+            paciente.setHistoriaClinicas(pacienteConHC.getHistoriaClinicas());
+
+            pacienteRepositorio.save(paciente);
+
+        }
+
     }
 }

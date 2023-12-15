@@ -1,6 +1,7 @@
 package com.MiSaludDigital.ServicioSalud.entidades;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,12 +18,13 @@ public class Turno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime fechaYHora;
+    private LocalDate fecha;
+    private LocalTime hora;
     private Boolean estadoTurno;
 
     @ManyToOne
     private Paciente paciente;  // Relación con Paciente
 
     @ManyToOne
-    private Profesional profesional;  // Relación con Profesional
+    private Profesional profesional;  // Relación con Profesional.
 }
