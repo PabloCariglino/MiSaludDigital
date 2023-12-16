@@ -4,6 +4,11 @@ body{
     
     
 }
+.titulo{
+    font-family:'Trebuchet MS';
+    text-align: center;
+}
+
 .imagen-fondoadmin,
 .imagen-fondouser {
     position: fixed;

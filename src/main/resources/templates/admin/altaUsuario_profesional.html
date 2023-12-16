@@ -24,7 +24,7 @@
 
 
                 <!--action="registroUsuarioProfesional" -->
-                <h2>Registro Usuario Profesional</h2>
+                <h2><div class="titulo">Registro Usuario Profesional</div></h2>
 
                 <div class="form-group mb-2">
                     <input type="text" class="form-contol" name="nombreUsuario" placeholder="NOMBRE"
@@ -55,7 +55,7 @@
     <footer th:replace="~{fragments/footer :: footer}"></footer>
 
     <!-- Mostrar nombre del usuario mediante la session -->
-    <h2 th:if="${session.usuariosession != null}" th:text="${session.usuariosession.nombreUsuario}"></h2>
+    
     <!-- header section start -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

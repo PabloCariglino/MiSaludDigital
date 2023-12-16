@@ -12,11 +12,12 @@
 
 <body>
     <header th:replace="~{fragments/header :: head}"></header>
-    <div class="container col-md-4 text-center contenedor-formulario-portal">
+    <div class="contenedor-formulario-usuario">
         <form class="mi-formulario" th:action="@{/paciente/registro/__${usuario.idUsuario}__}" method="post">
+            <h2><div class="titulo">Registro Datos Paciente</div></h2>
             <div class="mb-3">
                 
-                <input type="number" class="form-control" id="dniPaciente" name="dniPaciente"placeholder="DNI Paciente" />
+                <input type="number" class="form-control" id="dniPaciente" name="dniPaciente" placeholder="DNI Paciente" />
             </div>
             <div class="mb-3">
 
