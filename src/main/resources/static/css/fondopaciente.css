@@ -4,6 +4,12 @@ body{
     margin:0;
     
 }
+
+.titulo{
+    font-family:'Trebuchet MS';
+    text-align: center;
+}
+
 .imagen-fondoadmin,
 .imagen-fondouser {
     position: fixed;
@@ -54,7 +60,7 @@ body{
 }
 
 .mi-formulario{
-  
+  text-align: center;
    padding: 30px;
    border-radius: 10px;
    background-color: #f0f0f088; 
