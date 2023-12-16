@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Data;
@@ -41,6 +42,8 @@ public class Paciente {
     private List<Turno> turnos;
 
     // (mappedBy = "paciente", fetch = FetchType.LAZY)
-    @OneToMany
-    private List<Profesional> profesional;
+    // @OneToMany
+    // private List<Profesional> profesional;
+    @OneToOne
+    private Profesional profesional;
 }

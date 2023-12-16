@@ -34,8 +34,8 @@ public class ProfesionalControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    @Autowired
-    private HistoriaClinicaRepositorio historiaClinicaRepositorio;
+    // @Autowired
+    // private HistoriaClinicaRepositorio historiaClinicaRepositorio;
 
     @Autowired
     private HistoriaClinicaServicio historiaClinicaServicio;

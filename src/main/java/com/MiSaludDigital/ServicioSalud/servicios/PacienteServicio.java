@@ -10,11 +10,15 @@ import org.springframework.stereotype.Service;
 import com.MiSaludDigital.ServicioSalud.entidades.HistoriaClinica;
 import com.MiSaludDigital.ServicioSalud.entidades.Paciente;
 import com.MiSaludDigital.ServicioSalud.repositorios.PacienteRepositorio;
+import com.MiSaludDigital.ServicioSalud.repositorios.ProfesionalRepositorio;
 
 @Service
 public class PacienteServicio {
     @Autowired
     private PacienteRepositorio pacienteRepositorio;
+
+    @Autowired
+    private ProfesionalServicio profesionalServicio;
 
     // CREAR DATOS DE UN PACIENTE
     public Paciente crearPaciente(Long dniPaciente, String nombrePaciente, String ApellidoPaciente,
@@ -83,9 +87,13 @@ public class PacienteServicio {
     }
 
     // BUSCAR PACIENTE POR ID
-    public Paciente buscarPacientePorID(Paciente paciente) {
-
-        return pacienteRepositorio.findById(paciente.getId()).orElse(null);
+    public Paciente buscarPacientePorID(Long id) {
+        Optional<Paciente> respuesta = pacienteRepositorio.findById(id);
+        if (respuesta.isPresent()) {
+            Paciente paciente = respuesta.get();
+            return paciente;
+        }
+        return null;
     }
 
     // BUSCAR PACIENTE POR DNI
@@ -100,7 +108,7 @@ public class PacienteServicio {
     // ACTUALIZAR PACIENTE CON SU HISTORIA CLINICA
     // le pasamos un paciente y le seteamos la lista de la historia
     // clinica al paciente
-    public void actualizarDatosPacienteConHistoriaClinica( Long dniPaciente,
+    public void actualizarDatosPacienteConHistoriaClinica(Long dniPaciente,
             List<HistoriaClinica> historiaClinicas) {
 
         Optional<Paciente> respuesta = pacienteRepositorio.findBydniPaciente(dniPaciente);
@@ -115,5 +123,11 @@ public class PacienteServicio {
 
         }
 
+    }
+
+    public void seleccionarDoctor(Long idPac, Long idPro) {
+        Paciente paciente = buscarPacientePorID(idPac);
+        paciente.setProfesional(profesionalServicio.buscarProfesional(idPro));
+        pacienteRepositorio.save(paciente);
     }
 }

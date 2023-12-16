@@ -28,7 +28,8 @@
                 <th scope="col">Puntuación</th>
                 <th scope="col">Precio Consulta</th>
                 <th scope="col">Caract. Oferta</th>
-                <th scope="col">Reservar turno</th>
+                <th scope="col">Horario Atención</th>
+                <th scope="col">Acciones</th>
             </tr>
         </thead>
 
@@ -46,7 +47,12 @@
                 <td th:text="${profesional.puntuacionProfesional}"></td>
                 <td th:text="${profesional.precioConsulta}"></td>
                 <td th:text="${profesional.caracteristicaDeOferta}"></td>
-               <!--</tr><td ><a th:href="@{/paciente/agrendar_turno/__${usuario.idUsuario}__}">Registar</a></td>-->
+                <td th:text="${profesional.horario}"></td>
+                <!-- <td th:text="${usuario.idUsuario}"></td>-->
+                <a th:href="@{/ruta/modificar/__${id}__}" title="Editar Elemento"><button>Editar</button></a>
+                <td><a th:href="@{/paciente/seleccionar-doctor/__${profesional.matriculaProfesional}__/__${usuario.idUsuario}__}">Seleccionar Profesional</a></td>
+                 
+               <!-- </tr><td ><a th:href="@{/paciente/agrendar_turno/__${usuario.idUsuario}__}">Registar</a></td> -->
             </tr>
 
         </tbody>

@@ -14,31 +14,33 @@
 
 <body>
     <header th:replace="~{fragments/header :: head}"></header>
-<H1>TITULO PARA QUE SE VEA EL RESTO DEL FORM</H1>
+<H1>&nbsp</H1>
 
-<BR><H1>TITULO PARA QUE SE VEA EL RESTO DEL FORM</H1>
-    <BR><H1>TITULO PARA QUE SE VEA EL RESTO DEL FORM</H1>
+<BR><H1>&nbsp</H1>
+    <BR><H1>&nbsp</H1>
 
         <BR>
 
             <BR>
 
-    <div class="container col-md-4 text-center">
+    <div class="container col-md-4 text-center text-white">
+        <H1>Datos del profesional</H1>
+        <hr>
         <form th:action="@{/admin/registroDatosProfesional/__${usuario.idUsuario}__}" method="post">
             <div class="mb-3">
-                <label for="matriculaProfesional" class="form-label">matriculaProfesional</label>
+                <label for="matriculaProfesional" class="form-label">Matricula Profesional</label>
                 <input type="number" class="form-control" id="matriculaProfesional" name="matriculaProfesional" />
             </div>
             <div class="mb-3">
-                <label for="nombreProfesional" class="form-label">nombreProfesional</label>
+                <label for="nombreProfesional" class="form-label">Nombre Profesional</label>
                 <input type="text" class="form-control" id="nombreProfesional" name="nombreProfesional" />
             </div>
             <div class="mb-3">
-                <label for="apellidoProfesional" class="form-label">apellidoProfesional</label>
+                <label for="apellidoProfesional" class="form-label">Apellido Profesional</label>
                 <input type="text" class="form-control" id="apellidoProfesional" name="apellidoProfesional" />
             </div>
             <div class="mb-3">
-                <label for="edadProfesional" class="form-label">edadProfesional</label>
+                <label for="edadProfesional" class="form-label">Edad Profesional</label>
                 <input type="number" class="form-control" id="edadProfesional" name="edadProfesional" />
             </div>
             <div class="mb-3">
@@ -46,16 +48,25 @@
                 <input type="text" class="form-control" id="especialidadProfesional" name="especialidadProfesional" />
             </div>
             <div class="mb-3">
-                <label for="puntuacionProfesional" class="form-label">puntuacionProfesional</label>
+                <label for="puntuacionProfesional" class="form-label">PuntuacionProfesional</label>
                 <input type="number" class="form-control" id="puntuacionProfesional" name="puntuacionProfesional" />
             </div>
             <div class="mb-3">
-                <label for="precioConsulta" class="form-label">precioConsulta</label>
+                <label for="precioConsulta" class="form-label">PrecioConsulta</label>
                 <input type="number" class="form-control" id="precioConsulta" name="precioConsulta" />
             </div>
             <div class="mb-3">
                 <label for="caracteristicaDeOferta" class="form-label">Caracteristica de oferta</label>
                 <input type="text" class="form-control" id="caracteristicaDeOferta" name="caracteristicaDeOferta" />
+            </div>
+            <div class="form-group mb-2">
+                <label for="tipo">Horario:</label>
+                <select class="form-control" id="horario" name="horario" required>
+                    <option value="MANANA">Mañana</option>
+                    <option value="TARDE">Tarde</option>
+                    <option value="NOCHE">Noche</option>
+                    <!-- Agrega más opciones según tus necesidades -->
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

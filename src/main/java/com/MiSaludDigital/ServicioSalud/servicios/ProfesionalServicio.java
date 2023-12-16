@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 import com.MiSaludDigital.ServicioSalud.entidades.HistoriaClinica;
 import com.MiSaludDigital.ServicioSalud.entidades.Paciente;
 import com.MiSaludDigital.ServicioSalud.entidades.Profesional;
+import com.MiSaludDigital.ServicioSalud.enumeraciones.Horario;
 import com.MiSaludDigital.ServicioSalud.repositorios.HistoriaClinicaRepositorio;
 import com.MiSaludDigital.ServicioSalud.repositorios.ProfesionalRepositorio;
+
+import ch.qos.logback.core.subst.Token.Type;
 
 @Service
 public class ProfesionalServicio {
@@ -29,7 +32,7 @@ public class ProfesionalServicio {
     public Profesional crearProfesional(Long matriculaProfesional, String nombreProfesional, String apellidoProfesional,
             int edadProfesional,
             String especialidadProfesional, Long puntuacionProfesional,
-            double precioConsulta, String caracteristicaDeOferta) {
+            double precioConsulta, String caracteristicaDeOferta, String horario) {
 
         Profesional profesional = new Profesional();
         profesional.setMatriculaProfesional(matriculaProfesional);
@@ -42,7 +45,7 @@ public class ProfesionalServicio {
         profesional.setPrecioConsulta(precioConsulta);
         profesional.setCaracteristicaDeOferta(caracteristicaDeOferta);// (telemedicina, presencial, ubicación, obras
                                                                       // sociales, datos de contacto).
-
+        profesional.setHorario(Horario.valueOf(horario));
         return profesionalRepositorio.save(profesional);
     }
 

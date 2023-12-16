@@ -36,8 +36,8 @@ public class PacienteControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    @Autowired
-    private TurnoServicio turnoServicio;
+    // @Autowired
+    // private TurnoServicio turnoServicio;
 
     // VISTA INICIAL DEL PACIENTE
     @GetMapping("/dashboard")
@@ -57,15 +57,16 @@ public class PacienteControlador {
 
     @PostMapping("/registro/{id}")
     public String registroPaciente(@RequestParam Long dniPaciente, @RequestParam String nombrePaciente,
-            @RequestParam String ApellidoPaciente, @RequestParam("fechaNacimientoPaciente") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimientoPaciente,
+            @RequestParam String ApellidoPaciente,
+            @RequestParam("fechaNacimientoPaciente") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaNacimientoPaciente,
             @RequestParam String obraSocial, @RequestParam Double telContacto, @RequestParam String intencionConsulta,
             ModelMap modelo, @PathVariable Long id) throws Exception {
 
-         //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
-             //Date fechaDate = dateFormat.parse(fechaNacimientoPaciente);
-       pacienteServicio.crearPaciente(dniPaciente, nombrePaciente, ApellidoPaciente, fechaNacimientoPaciente, 
-       obraSocial, telContacto, intencionConsulta);
+            // Date fechaDate = dateFormat.parse(fechaNacimientoPaciente);
+            pacienteServicio.crearPaciente(dniPaciente, nombrePaciente, ApellidoPaciente, fechaNacimientoPaciente,
+                    obraSocial, telContacto, intencionConsulta);
 
             Paciente paciente = pacienteServicio.buscarPacientePorDNI(dniPaciente);
             usuarioServicio.actualizarUsuarioPacienteConDatos(paciente, id);
@@ -89,7 +90,6 @@ public class PacienteControlador {
         Usuario usuario = (Usuario) session.getAttribute("usuariosession");
         modelo.put("usuario", usuario);
 
-
         return "/paciente/datos_paciente.html";
     }
 
@@ -100,16 +100,24 @@ public class PacienteControlador {
         return "/paciente/actualizar_datosPaciente.html";
     }
 
-   
-
     // LISTADO DE PROFESIONALES PARA EL PACIENTE
     @GetMapping("/listadoProfesionales")
-    public String listadoProfesionales(ModelMap modelo) {
+    public String listadoProfesionales(ModelMap modelo, HttpSession session) {
 
         List<Profesional> profesionales = profesionalServicio.listaProfesionales();
         modelo.addAttribute("profesionales", profesionales);
-
+        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        modelo.put("usuario", usuario);
         return "paciente/lista_profesionales.html";
     }
 
+    @GetMapping("/seleccionar-doctor/{idPro}/{idPac}")
+    public String seleccionarDoctor(@PathVariable String idPro, @PathVariable String idPac, ModelMap modelo) {
+        pacienteServicio.seleccionarDoctor(Long.parseLong(idPac),Long.parseLong(idPro));
+        // List<Profesional> profesionales = profesionalServicio.listaProfesionales();
+        // modelo.addAttribute("profesionales", profesionales);
+        // return "paciente/lista_profesionales.html";
+        return "redirect:/index.html";
+
+    }
 }
