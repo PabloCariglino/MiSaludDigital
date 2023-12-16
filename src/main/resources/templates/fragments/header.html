@@ -1,9 +1,10 @@
 <div th:fragment="head">
     <div class="header_section" style="font-weight: bold;">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light bg-light fixed-top">
             <div class="logo">
                 <a href="/index"><img src="/images/logo2.png" sec:authorize="!isAuthenticated()"
                         style="max-width: 43px; height: auto; display: flex; margin-left: 5px;" /></a>
+                <span class="navbar-brand">Mi Salud Digital</span>
                 <a href="/paciente/dashboard"><img src="/images/logo2.png"
                         sec:authorize="isAuthenticated() and hasRole('ROLE_USER')"
                         style="max-width: 43px; height: auto;" /></a>
@@ -43,9 +44,13 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="true"> Portal Paciente</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/paciente/registrar">Registrarse</a></li>
+                            <!-- Verificar si el usuario tiene datos de paciente -->
+                            <th:block th:if="${session.usuariosession.paciente == null}">
+                                <li><a class="dropdown-item" href="/paciente/registrar">Registrarse</a></li>
+                            </th:block>
                             <li><a class="dropdown-item" href="/paciente/datos">Mis datos</a></li>
-                            <li><a class="dropdown-item" href="/paciente/listadoProfesionales">Lista profesionales</a></li>
+                            <li><a class="dropdown-item" href="/paciente/listadoProfesionales">Lista profesionales</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_PROFESIONAL')">
@@ -57,7 +62,7 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/profesional/datos">Mis Datos</a></li>
                             <li><a class="dropdown-item" href="/profesional/listadoDeTurnos">Mis turnos</a></li>
-                            <li><a class="dropdown-item" href="/profesional/listadoPacientes">Mis pacientes</a></li>
+                            <li><a class="dropdown-item" href="/profesional/listadoPacientes">Pacientes</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
@@ -69,11 +74,10 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/admin/registrarUsuarioProfesional">Registrar Usuario
                                     Profesional</a></li>
-                            <li><a class="dropdown-item" href="/admin/registrarDatosProfesional">Registrar Datos
-                                    Profesional</a></li>
                             <li><a class="dropdown-item" href="/admin/listadoProfesionalesAdmin">Lista usuarios
                                     Profesionales</a></li>
-                            <li><a class="dropdown-item" href="/admin/listadoPacientesAdmin">Lista usuarios Pacientes</a></li>
+                            <li><a class="dropdown-item" href="/admin/listadoPacientesAdmin">Lista usuarios
+                                    Pacientes</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown"

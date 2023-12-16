@@ -13,7 +13,7 @@
 
 <body>
     <header th:replace="~{fragments/header :: head}"></header>
-    <div class="contenedor-imagen">
+    <div class="container">
 
         <div class="container col-md-4 text-center contenedor-formulario-login">
 
@@ -31,7 +31,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Enviar</button>
-
+                
 
                 <!-- Mensajes Condicionales -->
                 <!-- <div th:if="${error != null}">
@@ -48,6 +48,40 @@
                 </div> -->
                 <!-- Mensajes Condicionales -->
             </form>
+            <div class="text-center">
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <div class="text-center">
+                        <img width="400" src="/images/indexsalud.jpg" class="img-responsive" alt="...">
+                      </div>
+                    </div>
+                    <div class="carousel-item">
+                      <img src="/images/indexcardiologia.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="/images/indexclinica.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="/images/indexginecologia.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="/images/indexpediatria.jpg" class="d-block w-100" alt="...">
+                    </div>
+                  </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                </div>
+          
+              </div>
         </div>
     </div>
 

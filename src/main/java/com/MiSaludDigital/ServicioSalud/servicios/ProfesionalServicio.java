@@ -1,13 +1,20 @@
 package com.MiSaludDigital.ServicioSalud.servicios;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.MiSaludDigital.ServicioSalud.entidades.HistoriaClinica;
+import com.MiSaludDigital.ServicioSalud.entidades.Paciente;
 import com.MiSaludDigital.ServicioSalud.entidades.Profesional;
+import com.MiSaludDigital.ServicioSalud.enumeraciones.Horario;
+import com.MiSaludDigital.ServicioSalud.repositorios.HistoriaClinicaRepositorio;
 import com.MiSaludDigital.ServicioSalud.repositorios.ProfesionalRepositorio;
+
+import ch.qos.logback.core.subst.Token.Type;
 
 @Service
 public class ProfesionalServicio {
@@ -15,12 +22,17 @@ public class ProfesionalServicio {
     @Autowired
     private ProfesionalRepositorio profesionalRepositorio;
 
+    @Autowired
+    private HistoriaClinicaRepositorio historiaClinicaRepositorio;
+
+    @Autowired
+    private UsuarioServicio usuarioServicio;
 
     // CREAR PROFESIONAL datos
     public Profesional crearProfesional(Long matriculaProfesional, String nombreProfesional, String apellidoProfesional,
             int edadProfesional,
             String especialidadProfesional, Long puntuacionProfesional,
-            double precioConsulta, String caracteristicaDeOferta) {
+            double precioConsulta, String caracteristicaDeOferta, String horario) {
 
         Profesional profesional = new Profesional();
         profesional.setMatriculaProfesional(matriculaProfesional);
@@ -31,9 +43,9 @@ public class ProfesionalServicio {
         profesional.setPuntuacionProfesional(puntuacionProfesional);
         // profesional.setHorariosDisponibles(horariosDisponibles); // Agregar ARRIBA!
         profesional.setPrecioConsulta(precioConsulta);
-        profesional.setCaracteristicaDeOferta(caracteristicaDeOferta);//(telemedicina, presencial, ubicación, obras sociales, datos de contacto).
-
-
+        profesional.setCaracteristicaDeOferta(caracteristicaDeOferta);// (telemedicina, presencial, ubicación, obras
+                                                                      // sociales, datos de contacto).
+        profesional.setHorario(Horario.valueOf(horario));
         return profesionalRepositorio.save(profesional);
     }
 
@@ -76,7 +88,8 @@ public class ProfesionalServicio {
     }
 
     /*
-     * // DAR DE BAJA PROFESIONAL /ELIMINAR PROFESIONALES // SE ELIMINAN EN EL SERVICIO DE USUARIO POR LOS ROLES
+     * // DAR DE BAJA PROFESIONAL /ELIMINAR PROFESIONALES // SE ELIMINAN EN EL
+     * SERVICIO DE USUARIO POR LOS ROLES
      * public void bajaDeProfesional(Long id) {
      * Optional<Profesional> validacion = profesionalRepositorio.findById(id);
      * if (validacion.isPresent()) {
@@ -96,7 +109,59 @@ public class ProfesionalServicio {
         return profesional;
     }
 
+    // CREAR HISTORIA CLINICA DE UN PACIENTE, SETEA LA HISTORIA CLINICA AL USUARIO
+    // PACIENTE/user
+    public HistoriaClinica crearHistoriaClinicaPaciente(Paciente paciente, String especialidad,
+            Long matriculaAtencionProfesional,
+            String historialMedico,
+            Date fechaDeAtencion,
+            String prepaga) {
 
-    
-   
+        // Obtener el usuario profesional actualmente autenticado
+       // Usuario usuarioProfesional = usuarioServicio.obtenerUsuarioAutenticado();
+       // Profesional profesional = usuarioProfesional.getProfesional();
+
+        // Validar si el usuario autenticado tiene el rol de Profesional
+       // if (profesional == null) {
+       //     throw new IllegalStateException("El usuario autenticado no es un profesional.");
+       // }
+
+        HistoriaClinica historiaClinica = new HistoriaClinica();
+        // paciente.setHistoriaClinicas(null);
+
+        historiaClinica.setPaciente(paciente);
+
+        historiaClinica.setEspecialidad(especialidad);
+        historiaClinica.setMatriculaAtencionProfesional(matriculaAtencionProfesional);
+        historiaClinica.setHistorialMedico(historialMedico);
+        historiaClinica.setFechaDeAtencion(fechaDeAtencion);
+        historiaClinica.setPrepaga(prepaga);
+
+        return historiaClinicaRepositorio.save(historiaClinica);
+    }
+
+    // ACTUALIZAR HISTORIA CLINICA DE UN PACIENTE
+    public void actualizarHistoriaClinicaPaciente(Long id, String especialidad, Long matriculaAtencionProfesional,
+            String historialMedico,
+            Date fechaDeAtencion,
+            String prepaga) {
+
+        Optional<HistoriaClinica> respuesta = historiaClinicaRepositorio.findById(id);
+
+        if (respuesta.isPresent()) {
+
+            HistoriaClinica historiaClinica = new HistoriaClinica();
+
+            historiaClinica.setEspecialidad(especialidad);
+            historiaClinica.setMatriculaAtencionProfesional(matriculaAtencionProfesional);
+            historiaClinica.setHistorialMedico(historialMedico);
+            historiaClinica.setFechaDeAtencion(fechaDeAtencion);
+            historiaClinica.setPrepaga(prepaga);
+
+            historiaClinicaRepositorio.save(historiaClinica);
+
+        }
+
+    }
+
 }

@@ -7,7 +7,7 @@ body{
 .contendor-imagen{
     position:center;
 }
-.contenedor-formulario-rusuario{
+.contenedor-formulario-usuario{
     display: flex;
     align-items: center;
     justify-content: right;

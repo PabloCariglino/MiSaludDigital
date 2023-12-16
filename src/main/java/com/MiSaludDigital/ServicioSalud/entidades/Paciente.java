@@ -3,10 +3,9 @@ package com.MiSaludDigital.ServicioSalud.entidades;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -20,10 +19,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Paciente {
 
+    
+    //@GeneratedValue(generator = "uuid")
+    //@GenericGenerator(name = "uuid", strategy = "uuid2") // Estrategia alternativa
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2") // Estrategia alternativa
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private Long dniPaciente;
     private String nombrePaciente;
     private String ApellidoPaciente;
@@ -34,13 +35,15 @@ public class Paciente {
     private Double telContacto;
     private String intencionConsulta;
 
-    @OneToOne
-    private HistoriaClinica historiaClinicas;
+    @OneToMany
+    private List<HistoriaClinica> historiaClinicas;
 
     @OneToMany
     private List<Turno> turnos;
 
     // (mappedBy = "paciente", fetch = FetchType.LAZY)
-    @OneToMany
-    private List<Profesional> profesional;
+    // @OneToMany
+    // private List<Profesional> profesional;
+    @OneToOne
+    private Profesional profesional;
 }

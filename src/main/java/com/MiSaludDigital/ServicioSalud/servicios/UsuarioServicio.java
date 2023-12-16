@@ -21,6 +21,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.MiSaludDigital.ServicioSalud.entidades.Imagen;
+import com.MiSaludDigital.ServicioSalud.entidades.Paciente;
 import com.MiSaludDigital.ServicioSalud.entidades.Profesional;
 import com.MiSaludDigital.ServicioSalud.entidades.Usuario;
 import com.MiSaludDigital.ServicioSalud.enumeraciones.Rol;
@@ -220,7 +221,7 @@ public class UsuarioServicio implements UserDetailsService {
         return usuario.getRol() == rol;
     }
 
-    // ACTUALIZAR EL PERFIL DEL USUARIO
+    // ACTUALIZAR EL PERFIL DEL USUARIO PROFESIONAL CON LOS DATOS
     @Transactional
     public void actualizarUsuarioProfesionalConDatos(Profesional profesional, Long idUsuario) throws Exception {
 
@@ -234,6 +235,31 @@ public class UsuarioServicio implements UserDetailsService {
             usuarioRepositorio.save(usuario);
         }
 
+    }
+
+    // ACTUALIZAR EL PERFIL DEL USUARIO PACIENTE CON LOS DATOS
+    @Transactional
+    public void actualizarUsuarioPacienteConDatos(Paciente paciente, Long idUsuario) throws Exception {
+
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
+        if (respuesta.isPresent()) {
+
+            Usuario usuario = respuesta.get();
+
+            usuario.setPaciente(paciente);
+
+            usuarioRepositorio.save(usuario);
+        }
+
+    }
+
+//OBTENER USUARIO ACTUAL AUTENTICADO en el inicio de session actual
+    public Usuario obtenerUsuarioAutenticado() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof Usuario) {
+            return (Usuario) authentication.getPrincipal();
+        }
+        return null; // o lanza una excepción si prefieres manejar el caso en que no hay usuario autenticado
     }
 
 }

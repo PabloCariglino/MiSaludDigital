@@ -39,9 +39,7 @@ public class AdminControlador {
     // REGISTRA DATOS DE UN PROFESIONAL
     @GetMapping("/registrarDatosProfesional/{id}")
     public String registrarProfesional(@PathVariable Long id, ModelMap modelo) {
-        modelo.put("usuario", usuarioServicio.getOne(id)); // inyectamos mediante la llave usuario el usuario a
-                                                           // modificar (especialidad)
-
+        modelo.put("usuario", usuarioServicio.getOne(id)); // inyectamos mediante la llave usuario el usuario a modificar (especialidad)
         return "admin/altaDatos_profesional.html";
     }
 
@@ -49,15 +47,14 @@ public class AdminControlador {
     public String registroProfesional(@RequestParam Long matriculaProfesional, @RequestParam String nombreProfesional,
             @RequestParam String apellidoProfesional, @RequestParam int edadProfesional,
             @RequestParam String especialidadProfesional, @RequestParam Long puntuacionProfesional,
-            @RequestParam double precioConsulta, @RequestParam String caracteristicaDeOferta, ModelMap modelo,
+            @RequestParam double precioConsulta, @RequestParam String caracteristicaDeOferta,@RequestParam String horario, ModelMap modelo,
             @PathVariable Long id)
             throws Exception {
 
-        
         try {
             profesionalServicio.crearProfesional(matriculaProfesional, nombreProfesional, apellidoProfesional,
                     edadProfesional, especialidadProfesional, puntuacionProfesional, precioConsulta,
-                    caracteristicaDeOferta);
+                    caracteristicaDeOferta,horario);
 
             Profesional profesional = profesionalServicio.buscarProfesional(matriculaProfesional);
             usuarioServicio.actualizarUsuarioProfesionalConDatos(profesional, id);

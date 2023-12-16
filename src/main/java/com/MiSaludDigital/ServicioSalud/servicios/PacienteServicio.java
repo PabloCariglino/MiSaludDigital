@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.MiSaludDigital.ServicioSalud.entidades.HistoriaClinica;
 import com.MiSaludDigital.ServicioSalud.entidades.Paciente;
 import com.MiSaludDigital.ServicioSalud.repositorios.PacienteRepositorio;
 
@@ -14,6 +15,9 @@ import com.MiSaludDigital.ServicioSalud.repositorios.PacienteRepositorio;
 public class PacienteServicio {
     @Autowired
     private PacienteRepositorio pacienteRepositorio;
+
+    @Autowired
+    private ProfesionalServicio profesionalServicio;
 
     // CREAR DATOS DE UN PACIENTE
     public Paciente crearPaciente(Long dniPaciente, String nombrePaciente, String ApellidoPaciente,
@@ -32,7 +36,7 @@ public class PacienteServicio {
     }
 
     // ACTUALIZAR DATOS DE UN PACIENTE
-    public void actualizarDatosPaciente(String id, Long dniPaciente, String nombrePaciente, String ApellidoPaciente,
+    public void actualizarDatosPaciente(Long id, Long dniPaciente, String nombrePaciente, String ApellidoPaciente,
             Date fechaNacimientoPaciente, String obraSocial, Double telContacto, String intencionConsulta) {
 
         Optional<Paciente> respuesta = pacienteRepositorio.findById(id);
@@ -75,17 +79,59 @@ public class PacienteServicio {
      * }
      */
 
-// LISTAR PACIENTES
+    // LISTAR PACIENTES
     public List<Paciente> listaPacientes() {
 
         return (List<Paciente>) pacienteRepositorio.findAll();
     }
 
-
     // BUSCAR PACIENTE POR ID
-    public Paciente buscarPacientePorID(Paciente paciente) {
-
-        return pacienteRepositorio.findById(paciente.getId()).orElse(null);
+    public Paciente buscarPacientePorID(Long id) {
+        Optional<Paciente> respuesta = pacienteRepositorio.findById(id);
+        if (respuesta.isPresent()) {
+            Paciente paciente = respuesta.get();
+            return paciente;
+        }
+        return null;
     }
 
+    // BUSCAR PACIENTE POR DNI
+    public Paciente buscarPacientePorDNI(Long dniPaciente) {
+
+        Optional<Paciente> respuesta = pacienteRepositorio.findBydniPaciente(dniPaciente);
+
+        if (respuesta.isPresent()) {
+            Paciente paciente = respuesta.get();
+            return paciente;
+        }
+
+        return null;
+    }
+
+    // ACTUALIZAR PACIENTE CON SU HISTORIA CLINICA
+    // le pasamos un paciente y le seteamos la lista de la historia
+    // clinica al paciente
+    public void actualizarDatosPacienteConHistoriaClinica(Long dniPaciente,
+            List<HistoriaClinica> historiaClinicas) {
+
+        Optional<Paciente> respuesta = pacienteRepositorio.findBydniPaciente(dniPaciente);
+
+        if (respuesta.isPresent()) {
+
+            Paciente paciente = respuesta.get();
+
+            paciente.setHistoriaClinicas(historiaClinicas);
+
+            pacienteRepositorio.save(paciente);
+
+        }
+
+    }
+
+    public void seleccionarDoctor(Long idPac, Long idPro) {
+
+        Paciente paciente = buscarPacientePorDNI(idPac);
+        paciente.setProfesional(profesionalServicio.buscarProfesional(idPro));
+        pacienteRepositorio.save(paciente);
+    }
 }
