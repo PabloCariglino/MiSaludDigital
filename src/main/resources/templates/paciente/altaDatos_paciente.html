@@ -12,51 +12,67 @@
 
 <body>
     <header th:replace="~{fragments/header :: head}"></header>
+
+
     <div class="container col-md-4 text-center contenedor-formulario-portal">
-        <form class="mi-formulario" th:action="@{/paciente/registro/__${usuario.idUsuario}__}" method="post">
-            <div class="mb-3">
-                
-                <input type="number" class="form-control" id="dniPaciente" name="dniPaciente"placeholder="DNI Paciente" />
-            </div>
-            <div class="mb-3">
 
-                <input type="text" class="form-control" id="nombrePaciente" name="nombrePaciente" placeholder="Nombre Paciente"/>
-            </div>
-            <div class="mb-3">
+        <div class="container text-center">
+            <br><br><br>
+            <form class="mi-formulario" th:action="@{/paciente/registro/__${usuario.idUsuario}__}" method="post">
+                <div class="mb-3">
 
-                <input type="text" class="form-control" id="ApellidoPaciente" name="ApellidoPaciente" placeholder="Apellido Paciente"/>
-            </div>
-            <div class="mb-3">
-                <label for="fechaNacimientoPaciente" class="form-label">Fecha Nacimiento</label>
-                <input type="date" class="form-control" id="fechaNacimientoPaciente" name="fechaNacimientoPaciente" placeholder="Fecha Nacimiento"/>
-            </div>
-            <div class="mb-3">
-         
-                <input type="text" class="form-control" id="obraSocial" name="obraSocial" placeholder="Obra Social"/>
-            </div>
-            <div class="mb-3">
-         
-                <input type="tel" class="form-control" id="telContacto" name="telContacto" placeholder="Telf. Contacto"/>
-            </div>
-            <div class="mb-3">
+                    <input type="number" class="form-control" id="dniPaciente" name="dniPaciente"
+                        placeholder="DNI Paciente" />
+                </div>
 
-                <input type="text" class="form-control" id="intencionConsulta" name="intencionConsulta" placeholder="Comentarios"/>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+                <div class="mb-3">
+
+                    <input type="text" class="form-control" id="nombrePaciente" name="nombrePaciente"
+                        th:value="${usuario.nombreUsuario}"/>
+                </div>
+                <div class="mb-3">
+
+                    <input type="text" class="form-control" id="ApellidoPaciente" name="ApellidoPaciente"
+                        placeholder="Apellido Paciente" />
+                </div>
+                <div class="mb-3">
+                    <label for="fechaNacimientoPaciente" class="form-label">Fecha Nacimiento</label>
+                    <input type="date" class="form-control" id="fechaNacimientoPaciente" name="fechaNacimientoPaciente"
+                        placeholder="Fecha Nacimiento" />
+                </div>
+                <div class="mb-3">
+
+                    <input type="text" class="form-control" id="obraSocial" name="obraSocial"
+                        placeholder="Obra Social" />
+                </div>
+                <div class="mb-3">
+
+                    <input type="tel" class="form-control" id="telContacto" name="telContacto"
+                        placeholder="Telf. Contacto" />
+                </div>
+                <div class="mb-3">
+
+                    <input type="text" class="form-control" id="intencionConsulta" name="intencionConsulta"
+                        placeholder="Comentarios" />
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+        </div>
+
     </div>
     <div class="container my-1">
         <!-- Mensajes Condicionales -->
         <div th:if="${error != null}">
             <div class="alert text-center alert-danger fade show" role="alert">
                 <strong>ERROR</strong>
-                <p th:text="error"></p>
+                <p th:text="${error}"></p>
             </div>
         </div>
         <div th:if="${exito != null}">
             <div class="alert text-center alert-success fade show" role="alert">
                 <strong>EXITO</strong>
-                <p th:text="exito"></p>
+                <p th:text="${exito}"></p>
             </div>
         </div>
         <!-- Mensajes Condicionales -->

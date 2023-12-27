@@ -40,8 +40,9 @@ public class PacienteControlador {
 
     // VISTA INICIAL DEL PACIENTE
     @GetMapping("/dashboard")
-    public String vistaPaciente() {
-
+    public String vistaPaciente(HttpSession session, ModelMap modelo) {
+        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        modelo.put("usuario", usuario);
         return "/paciente/vistaPaciente.html";
     }
 
@@ -49,7 +50,12 @@ public class PacienteControlador {
     @GetMapping("/registrar")
     public String registrarPaciente(HttpSession session, ModelMap modelo) {
         Usuario usuario = (Usuario) session.getAttribute("usuariosession");
-        modelo.put("usuario", usuario);
+        if (usuario != null) {
+            modelo.addAttribute("usuario", usuario);
+        }else{
+            modelo.put("error", "el usuario es nulo");
+        }
+        
         // modelo.put("usuario", usuarioServicio.getOne(id));
         return "/paciente/altaDatos_paciente.html";
     }
@@ -74,7 +80,9 @@ public class PacienteControlador {
             // fechaDate, obraSocial,
             // telContacto, intencionConsulta);
             modelo.put("exito", "Paciente registrado con éxito");
-            return "/paciente/vistaPaciente.html";
+            Usuario usuario = usuarioServicio.getOne(id);
+            modelo.put("usuario", usuario);
+            return "paciente/vistaPaciente.html";
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
         }

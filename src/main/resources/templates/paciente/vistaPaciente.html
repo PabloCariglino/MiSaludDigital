@@ -13,6 +13,53 @@
 
 <body>
   <header th:replace="~{fragments/header :: head}"></header>
+    <br>
+    
+    
+   
+
+      <!-- en teoria si el pasiente es nulo se muestra, pero ojo 
+      que hay que mandar el usuario previamente -->
+      <th:block th:if="${usuario.paciente == null}">
+        <div class="container-xl">
+        <button type="button"  class="btn btn-primary btn-lg"> 
+          <a class="btn btn-primary btn-lg" href="/paciente/registrar">
+            Ingrese sus datos</a></button>
+        </div>
+      </th:block>
+     
+      <th:block class="container-fluid" th:if="${usuario.paciente ne null}">
+
+        <div class="text-center ">
+          <br><br><br>
+          <h3>Hola <span th:text="${usuario.paciente.nombrePaciente}"></span></h3>
+          <br>
+        <button type="button"  class="btn btn-primary btn-lg"> 
+          <a class="btn btn-primary btn-lg" href="/paciente/listadoProfesionales">
+            seleccione un profesional</a></button>
+            
+        </div>
+        <br><br>
+      </th:block>
+
+    
+
+    <div class="container-sm">
+      <!-- Mensajes Condicionales -->
+      <div th:if="${error != null}">
+          <div class="alert text-center alert-danger fade show" role="alert">
+              <strong>ERROR</strong>
+              <p th:text="${error}"></p>
+          </div>
+      </div>
+      <div th:if="${exito != null}">
+          <div class="alert text-center alert-success fade show" role="alert">
+              <strong>EXITO</strong>
+              <p th:text="${exito}"></p>
+          </div>
+      </div>
+      <!-- Mensajes Condicionales -->
+  </div>
 
 
   <footer th:replace="~{fragments/footer :: footer}"></footer>
