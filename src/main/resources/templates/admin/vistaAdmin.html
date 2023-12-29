@@ -12,6 +12,32 @@
 <body>
     <header th:replace="~{fragments/header :: head}"></header>
 
+    <div class="text-center ">
+        <br><br><br>
+        <h3>Hola Administrador</h3>
+        <br>
+      <button type="button"  class="btn btn-primary btn-lg"> 
+        <a class="btn btn-primary btn-lg" href="/admin/registrarUsuarioProfesional">
+          Registar usuario para un profesional</a></button>
+          
+      </div>
+
+      <div class="container-sm">
+        <!-- Mensajes Condicionales -->
+        <div th:if="${error != null}">
+            <div class="alert text-center alert-danger fade show" role="alert">
+                <strong>ERROR</strong>
+                <p th:text="${error}"></p>
+            </div>
+        </div>
+        <div th:if="${exito != null}">
+            <div class="alert text-center alert-success fade show" role="alert">
+                <strong>EXITO</strong>
+                <p th:text="${exito}"></p>
+            </div>
+        </div>
+        <!-- Mensajes Condicionales -->
+    </div>
 
     <footer th:replace="~{fragments/footer :: footer}"></footer>
 

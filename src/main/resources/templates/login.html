@@ -13,13 +13,14 @@
 
 <body>
     <header th:replace="~{fragments/header :: head}"></header>
-    <div class="container">
+    
 
-        <div class="container col-md-4 text-center contenedor-formulario-login">
+
+        <div class="formulario-login">
 
 
             <form class="FormRegistro mi-formulario" th:action="@{/logincheck}" method="post">
-
+                
                 <h2>Login 🔑</h2>
 
                 <div class="form-group mb-2">
@@ -83,7 +84,7 @@
           
               </div>
         </div>
-    </div>
+    
 
     <footer th:replace="~{fragments/footer :: footer}"></footer>
 

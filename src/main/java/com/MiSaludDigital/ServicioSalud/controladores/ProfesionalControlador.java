@@ -22,6 +22,8 @@ import com.MiSaludDigital.ServicioSalud.servicios.PacienteServicio;
 import com.MiSaludDigital.ServicioSalud.servicios.ProfesionalServicio;
 import com.MiSaludDigital.ServicioSalud.servicios.UsuarioServicio;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/profesional")
 public class ProfesionalControlador {
@@ -66,7 +68,9 @@ public class ProfesionalControlador {
 
     // DATOS DEL PROFESIONAL
     @GetMapping("/datos")
-    public String datosProfesional() {
+    public String datosProfesional(HttpSession session, ModelMap modelo) {
+        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        modelo.put("usuario", usuario);
 
         return "/profesional/datos_profesional.html";
     }
@@ -102,10 +106,10 @@ public class ProfesionalControlador {
 
     // REGISTRA HISTORIA CLINICA DE UN PACIENTE
     @GetMapping("/registrarHistoriaClinicaPaciente/{id}")
-    public String registrarHistoriaClinicaPaciente(@PathVariable Long id, ModelMap modelo) {
+    public String registrarHistoriaClinicaPaciente( @PathVariable Long id, ModelMap modelo) {
         
         modelo.put("usuario", usuarioServicio.getOne(id)); // inyectamos mediante la llave usuario el usuario a modificar (especialidad)
-                                                           
+                                                               
         return "profesional/alta_historia_clinica.html";
     }
 
@@ -124,22 +128,23 @@ public class ProfesionalControlador {
 
             Paciente paciente = pacienteServicio.buscarPacientePorDNI(usuario.getPaciente().getDniPaciente());
 
+            // en este metodo vamos a setearle a cada HC el usuario al cual pertenece 
+            //luego se retorna esta hc
             HistoriaClinica hc = profesionalServicio.crearHistoriaClinicaPaciente(paciente, especialidad,
                     matriculaAtencionProfesional,
                     historialMedico, fechaDeAtencion, prepaga);
 
-            // HistoriaClinica historiaClinica =
-            // historiaClinicaServicio.buscarHistoriaClinicaPorID(id);
-
+           
+            //aca obtenemos la lista de HC que pueda tener el paciente ya seteado
             List<HistoriaClinica> listaHistoriaClinicas = paciente.getHistoriaClinicas();
-
+            //aca añadimos la hc que creamos y retornamos anteriormente
             listaHistoriaClinicas.add(hc);
-
+            
+            //para finalmente actualizar al paciente, con la nueva lista 
             pacienteServicio.actualizarDatosPacienteConHistoriaClinica( paciente.getDniPaciente(), listaHistoriaClinicas);
-            //paciente.setHistoriaClinicas(listaHistoriaClinicas);
+            
 
-            // pacienteServicio.actualizarDatosPacienteConHistoriaClinica(paciente,
-            // paciente.getDniPaciente());
+           
 
             modelo.put("exito", "Historia clinica registrada con éxito");
 

@@ -14,35 +14,39 @@
 <body>
     <header th:replace="~{fragments/header :: head}"></header>
 
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Id usuario profesional</th>
-                <th scope="col">Nombre del usuario profesional</th>
-                <!--<th scope="col">password</th>-->
-                <th scope="col">Email</th>
-                <th scope="col">Estado del usuario</th>
-                <th scope="col">Registrar datos profesional</th>
-               
-            </tr>
-        </thead>
-
-
-        <tbody th:each="usuario: ${usuariosProfesionales}">
-            <tr>
-                <th scope="row" th:text="${usuario.idUsuario}"></th>
-
-                <td th:text="${usuario.nombreUsuario}"></td>
-               <!--<td th:text="${usuario.password}"></td>--> 
-                <td th:text="${usuario.email}"></td>
-                <td th:text="${usuario.estadoUsuario}"></td>
-                <td ><a th:href="@{/admin/registrarDatosProfesional/__${usuario.idUsuario}__}">Registar</a></td>
-            </tr>
-
-        </tbody>
-
-
-    </table>
+    <div class="container">
+        <div class="text-center">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id usuario profesional</th>
+                    <th scope="col">Nombre del usuario profesional</th>
+                    <!--<th scope="col">password</th>-->
+                    <th scope="col">Email</th>
+                    <th scope="col">Estado del usuario</th>
+                    <th scope="col">Registrar datos profesional</th>
+                   
+                </tr>
+            </thead>
+    
+    
+            <tbody th:each="usuario: ${usuariosProfesionales}">
+                <tr>
+                    <th scope="row" th:text="${usuario.idUsuario}"></th>
+    
+                    <td th:text="${usuario.nombreUsuario}"></td>
+                   <!--<td th:text="${usuario.password}"></td>--> 
+                    <td th:text="${usuario.email}"></td>
+                    <td th:text="${usuario.estadoUsuario}"></td>
+                    <td ><a th:href="@{/admin/registrarDatosProfesional/__${usuario.idUsuario}__}">Registar</a></td>
+                </tr>
+    
+            </tbody>
+    
+    
+        </table>
+    </div>
+    </div>
 
 
 

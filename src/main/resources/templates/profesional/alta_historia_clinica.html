@@ -18,40 +18,72 @@
     <form th:action="@{/profesional/registroHistoriaClinicaPaciente/__${usuario.idUsuario}__}" method="post">
        
             
-            <h1>PARA QUE APAREZCAN EL RESTO DE ATRIBUTOS A LLENAR</h1>
-            <div class="container-fluid">
+            
+            <div class="formulario-historia-clinica">
                     
                 
-
-
+                <h3> Ingresar historia Clinica</h3>
+                <br>
+               
+                
                 <div class="mb-3">  
-                    <!--HACER UN SELECT CON LAS ESPECIALIDADES-->
+                    <!--Mediante la sesion del usuario vamos a acceder a los atributos del 
+                    profesional(que se seteo anteriormente)-->
                     <label for="especialidad" class="form-label">Especialidad</label>
-                    <input type="text" class="form-control" id="especialidad" name="especialidad" />
+                    <input type="text" class="form-control" id="especialidad" name="especialidad"
+                     th:value="${session.usuariosession.profesional.especialidadProfesional}" 
+                     readonly/>
                 </div>
                 <div class="mb-3">
-                    <label for="matriculaAtencionProfesional" class="form-label">Ingrese su matricula de
+                    <label for="matriculaAtencionProfesional" class="form-label"> matricula de
                         profesional</label>
                     <input type="number" class="form-control" id="matriculaAtencionProfesional"
-                        name="matriculaAtencionProfesional" />
+                        name="matriculaAtencionProfesional"
+                        th:value="${session.usuariosession.profesional.matriculaProfesional}"
+                        readonly />
                 </div>
-                <div class="mb-3">
-                    <label for="historialMedico" class="form-label">historialMedico</label>
-                    <input type="text" class="form-control" id="historialMedico" name="historialMedico" />
-                </div>
+                
+                
                 <div class="mb-3">
                     <label for="fechaDeAtencion" class="form-label">Ingrese fecha</label>
                     <input type="date" class="form-control" id="fechaDeAtencion" name="fechaDeAtencion" />
                 </div>
                 <div class="mb-3">
                     <label for="prepaga" class="form-label">Obra social</label>
-                    <input type="text" class="form-control" id="prepaga" name="prepaga" />
+                    <input type="text" class="form-control" id="prepaga" name="prepaga"
+                    th:value="${usuario.paciente.obraSocial}" />
+                </div>
+                <div class="mb-3">
+                    <label for="historialMedico" class="form-label">Historia Clinica</label>
+                    <textarea name="historialMedico" id="historialMedico" cols="50" rows="5"
+                    placeholder="ej: el paciente se atendio por fiebre en conclusion se receto un parecetamol cada 8hs" 
+                    ></textarea>
                 </div>
 
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
 
+    </div>
+    <!--
+    <h2 th:if="${session.usuariosession != null}" th:text="${session.usuariosession.nombreUsuario}"></h2>-->
+
+
+    <div class="container my-1">
+        <!-- Mensajes Condicionales -->
+        <div th:if="${error != null}">
+            <div class="alert text-center alert-danger fade show" role="alert">
+                <strong>ERROR</strong>
+                <p th:text="${error}"></p>
+            </div>
+        </div>
+        <div th:if="${exito != null}">
+            <div class="alert text-center alert-success fade show" role="alert">
+                <strong>EXITO</strong>
+                <p th:text="${exito}"></p>
+            </div>
+        </div>
+        <!-- Mensajes Condicionales -->
     </div>
 
     <footer th:replace="~{fragments/footer :: footer}"></footer>
