@@ -112,11 +112,11 @@ public class PacienteControlador {
 
     @GetMapping("/seleccionar-doctor/{idPro}/{idPac}")
     public String seleccionarDoctor(@PathVariable String idPro, @PathVariable String idPac, ModelMap modelo) {
-        pacienteServicio.seleccionarDoctor(Long.parseLong(idPac),Long.parseLong(idPro));
+        pacienteServicio.seleccionarDoctor(Long.parseLong(idPac), Long.parseLong(idPro));
         // List<Profesional> profesionales = profesionalServicio.listaProfesionales();
         // modelo.addAttribute("profesionales", profesionales);
         // return "paciente/lista_profesionales.html";
-usuarioServicio.getOne(null);
+        usuarioServicio.getOne(null);
 
         return "paciente/misTurnos.html";
 

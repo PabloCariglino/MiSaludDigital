@@ -116,8 +116,8 @@ public class UsuarioServicio implements UserDetailsService {
 
     }
 
-    // DEVUELVE UN USUARIO POT ID
-    public Usuario getOne(Long id) {
+     // DEVUELVE UN USUARIO POT ID
+     public Usuario getOne(Long id) {
         return usuarioRepositorio.getOne(id);
     }
 

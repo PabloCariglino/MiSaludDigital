@@ -13,10 +13,16 @@
 
 <body>
     <header th:replace="~{fragments/header :: head}"></header>
-
+<br>SEPÁRADOR<br>
+<br>SEPÁRADOR<br>
+<br>SEPÁRADOR<br>
+<br>SEPÁRADOR<br>
+<br>SEPÁRADOR<br>
+<br>SEPÁRADOR<br>
+<br>SEPÁRADOR<br>
     <h2>Solicitud de Turno</h2>
 
-    <form method="post" action="/turnos/solicitar">
+    <form method="post" action="/turnos/emisionTurno">
         <label for="especialidad">Especialidad:</label>
         <select id="especialidad" name="especialidad">
             <option th:each="especialidad : ${especialidades}" th:value="${especialidad}" th:text="${especialidad}"></option>
